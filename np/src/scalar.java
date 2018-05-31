@@ -1,9 +1,9 @@
 public class scalar extends quantity{
 
-    Double value;
+    Double data;
 
     public scalar(Double value){
-        this.value = value;
+        this.data = value;
     }
 
 }

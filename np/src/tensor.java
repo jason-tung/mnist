@@ -61,7 +61,12 @@ public class tensor extends quantity{
     public Object g(int[] inds){
 	    quantity res = this;
 	    for(int i : inds){
-	        res = res[i].data;
+	        try{
+                res = res.data[i];
+            } catch (Exception e){
+	            e.printStackTrace();
+	            return res.data;
+            }
         }
         return res;
     }
@@ -92,5 +97,10 @@ public class tensor extends quantity{
 			}
 		}
 	}
+
+	public static void main(){
+	    int[] shape = {5, 5, 5, 5, 5};
+	    tensor t = tensor.rand_normal(shape);
+    }
 
 }
