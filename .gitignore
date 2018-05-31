@@ -40,9 +40,6 @@ hs_err_pid*
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-*.xml*
-*.iml*
-
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
