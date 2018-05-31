@@ -26,6 +26,25 @@ public class Activations{
         return Math.max(0,x);
     }
     private static double softmax(double x ){
+<<<<<<< HEAD
+        tensor maximus = x.rowMaxs;
+	return null;
+	
+    }
+
+    private static tensor rowMaxs(tensor x){
+	tensor rTensor = tensor.zeros({x.shape[0]});
+	for (int i =0; i < x.shape[0]; i++){
+	    int max = tensor.get(i,0);
+	    for (int j = 1; j <= x.shape[1]; j++){
+		if (tensor.get(i,j) > max){
+		    max = tensor.get(i,j);
+		}
+	    }
+	    rTensor.s(max, i);
+	}
+	return rTensor;
+=======
         // https://github.com/liulhdarks/darks-learning/blob/master/src/main/java/darks/learning/common/utils/MatrixHelper.java
         //http://jblas.org/javadoc/org/jblas/DoubleMatrix.html
         return null;
@@ -33,6 +52,7 @@ public class Activations{
 
     private static tensor rowMaxs(tensor x){
         return null;
+>>>>>>> cd1e0900a6cb4d5b884b7b370a2ce28b7be8f92f
     }
 
     private static double sigmoid(double x ){
