@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class np {
 
-    public static double sum(array arr){return 0;}
-    public static double mean(array arr){};
-    public static double max(array arr){};
-    public static double min(array arr){};
+    public static double sum(tensor arr){return 0;}
+    public static double mean(tensor arr){};
+    public static double max(tensor arr){};
+    public static double min(tensor arr){};
 
-    public static boolean equal(array arr1, array arr2){};
+    public static boolean equal(tensor arr1, tensor arr2){};
 
-    public static array matmul(array arr){};
+    public static tensor matmul(tensor arr){};
 
 
 

@@ -31,7 +31,7 @@ public class Activations{
 	return null;
     }
 
-    private static array rowMaxs(array x){
+    private static tensor rowMaxs(tensor x){
 	return null;
     }
     

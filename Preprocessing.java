@@ -13,7 +13,7 @@ public class Preprocessing{
     }
     
     //creates the one-hot layer with which to compare output layer
-    public static array to_categorical(array){
+    public static tensor to_categorical(tensor){
 	
     }
     
