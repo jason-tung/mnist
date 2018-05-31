@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/mnist.iml" filepath="$PROJECT_DIR$/.idea/mnist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/np/np.iml" filepath="$PROJECT_DIR$/np/np.iml" />
     </modules>
   </component>
 </project>
