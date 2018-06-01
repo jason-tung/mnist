@@ -2,6 +2,7 @@ package np;
 
 import java.util.Arrays;
 import java.util.Random;
+import static np.py.*;
 
 public class tensor extends quantity{
 
@@ -131,12 +132,15 @@ public class tensor extends quantity{
         return res + "]\n";
     }
 
-	public static void main(String[] args){
-	    int[] shape = {5, 5};
-	    tensor t = tensor.rand_normal(shape);
-	    System.out.println(t);
-	    int[] inds = {4, 3};
-	    System.out.println(t.g(inds));
+    public static void main(String[] args){
+        tensor t = tensor.rand_normal(new int[]{5, 5, 5, 5, 5, 5, 5});
+        print(t);
+        int[] inds = {4, 3};
+        print(t.g(inds));
+        int[] inds2 = {4};
+        print(t.g(inds2));
+        t.s(inds, 3290.234234);
+        print(t);
     }
 
 }

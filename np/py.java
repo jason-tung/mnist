@@ -14,6 +14,8 @@ public class py {
         return s.__val__();
     }
 
-
+    public static void print(pyobj s){
+        System.out.println(str(s));
+    }
 
 }
