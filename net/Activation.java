@@ -37,14 +37,18 @@ public class Activation {
     }
 
     private static tensor rowMaxs(tensor x){
-	tensor rTensor = tensor.zeros({x.shape[0]});
+        int[] f = {x.shape[0]};
+	tensor rTensor = tensor.zeros(f);
 	for (int i =0; i < x.shape[0]; i++){
-	    int max = x.get(i,0);
+	    int[] g = {i, 0};
+	    quantity max = x.get(g);
 	    for (int j = 1; j <= x.shape[1]; j++){
-		if (x.get(i,j) > max){
+	        int[]h = {i,j};
+		if (x.get(h) > max){
 		}
 	    }
-	    rTensor.set(max, i);
+	    int[] j = {i};
+	    rTensor.set(j, max);
 	}
 	return rTensor;
 =======
