@@ -3,7 +3,7 @@ package np;
 import java.util.Arrays;
 import java.util.Random;
 
-public class tensor extends quantity implements pyobj{
+public class tensor extends quantity{
 
     private quantity[] data;
     public int[] shape;
@@ -85,17 +85,30 @@ public class tensor extends quantity implements pyobj{
 
 	//getters, setters, and toString
 
-    public Object g(int[] inds){
+    public quantity g(int[] inds){
         return g(inds, 0);
     }
 
-    public Object g(int[] inds, int pos){
+    public quantity g(int[] inds, int pos){
         if(pos==len(inds)) return this;
         return data[inds[pos]].g(inds, pos+1);
     }
 
+    public void s(int[] inds, Double newval){
+        if(len(inds) != len(shape)) throw new UnsupportedOperationException("Cannot set value for entire tensors");
+        quantity scal = g(inds);
+        scal.s(inds, newval);
+
+    }
+
     public String toString(){
         return this.__str__();
+    }
+
+    public int __len__(){return this.data.length;}
+
+    public double __val__(){
+        throw new UnsupportedOperationException("You called float() on a tensor, tensors cannot be converted to float");
     }
 
 	public String __str__(){
