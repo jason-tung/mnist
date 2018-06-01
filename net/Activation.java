@@ -41,10 +41,10 @@ public class Activation {
 	tensor rTensor = tensor.zeros(f);
 	for (int i =0; i < x.shape[0]; i++){
 	    int[] g = {i, 0};
-	    quantity max = x.get(g);
+	    Double max = x.get(g).data;
 	    for (int j = 1; j <= x.shape[1]; j++){
 	        int[]h = {i,j};
-		if (x.get(h) > max){
+		if (x.get(h).data > max){
 		}
 	    }
 	    int[] j = {i};
