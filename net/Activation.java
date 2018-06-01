@@ -39,13 +39,12 @@ public class Activation {
     private static tensor rowMaxs(tensor x){
 	tensor rTensor = tensor.zeros({x.shape[0]});
 	for (int i =0; i < x.shape[0]; i++){
-	    int max = tensor.get(i,0);
+	    int max = x.get(i,0);
 	    for (int j = 1; j <= x.shape[1]; j++){
-		if (tensor.get(i,j) > max){
-		    max = tensor.get(i,j);
+		if (x.get(i,j) > max){
 		}
 	    }
-	    rTensor.s(max, i);
+	    rTensor.set(max, i);
 	}
 	return rTensor;
 =======
