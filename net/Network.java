@@ -1,4 +1,4 @@
-import java.util.*;
+package net;
 
 public class Network{
     LossFunction loss_function;

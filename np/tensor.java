@@ -1,10 +1,14 @@
-import java.util.ArrayList;
+package np;
+
+import java.util.Arrays;
 import java.util.Random;
 
-
-public class tensor extends quantity{
+public class tensor extends quantity implements pyobj{
 
     private quantity[] data;
+    public int[] shape;
+
+    //public constructors and helper classes for function passing
 
     static class ones implements Callable{
         public Double call(){
@@ -38,9 +42,6 @@ public class tensor extends quantity{
         }
     }
 
-
-	public int[] shape;
-
 	public static tensor zeros(int[] shape){
 	    return new tensor(shape, new zeros(), 0);
     }
@@ -58,32 +59,16 @@ public class tensor extends quantity{
     }
 
 
-    public Object g(int[] inds){
-	    quantity res = this;
-	    for(int i : inds){
-	        try{
-                res = res.data[i];
-            } catch (Exception e){
-	            e.printStackTrace();
-	            return res.data;
-            }
-        }
-        return res;
-    }
-
-
-
-
+    //private constructor for flexible construction and helper methods
 	private tensor(int[] shape, Callable fill_func, int pos){
-		data = new tensor[shape[0]];
+	    this.data = new quantity[shape[pos]];
 		this.shape = shape;
-		construct(data, this.shape, pos,fill_func);
+		construct(this.data, this.shape, pos, fill_func);
 	}
 
 	private int len(int[] obj){return obj.length;}
 
 	private void construct(quantity[] current_obj, int[] shape, int pos,  Callable fill_func){
-
 		int val = shape[pos];
 
 		if(pos == len(shape)-1){
@@ -98,9 +83,39 @@ public class tensor extends quantity{
 		}
 	}
 
-	public static void main(){
-	    int[] shape = {5, 5, 5, 5, 5};
+	//getters, setters, and toString
+
+    public Object g(int[] inds){
+        return g(inds, 0);
+    }
+
+    public Object g(int[] inds, int pos){
+        if(pos==len(inds)) return this;
+        return data[inds[pos]].g(inds, pos+1);
+    }
+
+    public String toString(){
+        return this.__str__();
+    }
+
+	public String __str__(){
+	    String res = "[";
+	    for(quantity q :data){
+	        if (q instanceof tensor){
+	            res += q.__str__();
+            } else{
+	            res +=  q.__str__() + " ";
+            }
+        }
+        return res + "]\n";
+    }
+
+	public static void main(String[] args){
+	    int[] shape = {5, 5};
 	    tensor t = tensor.rand_normal(shape);
+	    System.out.println(t);
+	    int[] inds = {4, 3};
+	    System.out.println(t.g(inds));
     }
 
 }
