@@ -1,11 +1,12 @@
 package net;
 
 import java.util.*;
+import np.tensor;
 
-public class Activations{
+public class Activation {
     String callType;
 
-    public Activations(String s){
+    public Activation(String s){
         callType = s;
     }
 
@@ -20,6 +21,7 @@ public class Activations{
                 return sigmoid(x);
             case "tanh":
                 return tanh(x);
+                //add a default here that throws an error that says invalid activation function
         }
     }
 

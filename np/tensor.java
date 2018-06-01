@@ -85,6 +85,14 @@ public class tensor extends quantity{
 
 	//getters, setters, and toString
 
+    public quantity get(int[] inds){
+        return g(inds);
+    }
+
+    public void set(int[] inds, Double newval){
+        s(inds, newval);
+    }
+
     public quantity g(int[] inds){
         return g(inds, 0);
     }
