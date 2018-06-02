@@ -9,6 +9,7 @@ public class Activation {
 
     public Activation(String s) {
         callType = s;
+        apply(10); //Catch errors in the constructor without repeating the switch statement with a test
     }
 
     //applies a function class as an actual function
@@ -22,8 +23,8 @@ public class Activation {
                 return sigmoid(x);
             case "tanh":
                 return tanh(x);
-            //add a default here that throws an error that says invalid activation function
         }
+        throw new IllegalArgumentException("The activation you specified is invalid");
     }
 
     //static math functions

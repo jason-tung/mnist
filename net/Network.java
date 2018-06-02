@@ -17,7 +17,9 @@ public class Network{
     }
 
     //takes in file name and predicts number
-    public int predict(String fileName);
+    public int predict(String fileName){
+        throw new IllegalStateException("Not implemented yet, this is here so it compiles");
+    };
 
 
 }

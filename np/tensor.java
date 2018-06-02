@@ -43,48 +43,48 @@ public class tensor extends quantity{
         }
     }
 
-	public static tensor zeros(int[] shape){
-	    return new tensor(shape, new zeros(), 0);
+    public static tensor zeros(int[] shape){
+        return new tensor(shape, new zeros(), 0);
     }
 
     public static tensor ones(int[] shape){
-	    return new tensor(shape, new ones(), 0);
+        return new tensor(shape, new ones(), 0);
     }
 
     public static tensor rand_normal(int[] shape){
-	    return rand_normal(shape, 0.0, 1.0);
+        return rand_normal(shape, 0.0, 1.0);
     }
 
     public static tensor rand_normal(int[] shape, Double mean, Double variance){
-	    return new tensor(shape, new normal(mean, variance), 0);
+        return new tensor(shape, new normal(mean, variance), 0);
     }
 
 
     //private constructor for flexible construction and helper methods
-	private tensor(int[] shape, Callable fill_func, int pos){
-	    this.data = new quantity[shape[pos]];
-		this.shape = shape;
-		construct(this.data, this.shape, pos, fill_func);
-	}
+    private tensor(int[] shape, Callable fill_func, int pos){
+        this.data = new quantity[shape[pos]];
+        this.shape = shape;
+        construct(this.data, this.shape, pos, fill_func);
+    }
 
-	private int len(int[] obj){return obj.length;}
+    private int len(int[] obj){return obj.length;}
 
-	private void construct(quantity[] current_obj, int[] shape, int pos,  Callable fill_func){
-		int val = shape[pos];
+    private void construct(quantity[] current_obj, int[] shape, int pos,  Callable fill_func){
+        int val = shape[pos];
 
-		if(pos == len(shape)-1){
-			for(int i = 0; i < val; i++){
-				current_obj[i] = new scalar(fill_func.call());
-			}
-		} else{
-			for(int i = 0; i < val; i++){
-			    tensor t = new tensor(shape, fill_func, pos+1);
-			    current_obj[i] = t;
-			}
-		}
-	}
+        if(pos == len(shape)-1){
+            for(int i = 0; i < val; i++){
+                current_obj[i] = new scalar(fill_func.call());
+            }
+        } else{
+            for(int i = 0; i < val; i++){
+                tensor t = new tensor(shape, fill_func, pos+1);
+                current_obj[i] = t;
+            }
+        }
+    }
 
-	//getters, setters, and toString
+    //getters, setters, and toString
 
     public quantity get(int[] inds){
         return g(inds);
@@ -124,13 +124,13 @@ public class tensor extends quantity{
         return this.data;
     }
 
-	public String __str__(){
-	    String res = "[";
-	    for(quantity q :data){
-	        if (q instanceof tensor){
-	            res += q.__str__();
+    public String __str__(){
+        String res = "[";
+        for(quantity q :data){
+            if (q instanceof tensor){
+                res += q.__str__();
             } else{
-	            res +=  q.__str__() + " ";
+                res +=  q.__str__() + " ";
             }
         }
         return res + "]\n";
