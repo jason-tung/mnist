@@ -1,8 +1,7 @@
 package np;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.util.*;
-import static np.py.*;
+import static py.py.*;
 
 public class np {
 

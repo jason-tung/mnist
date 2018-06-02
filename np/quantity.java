@@ -1,6 +1,7 @@
 package np;
+import py.*;
 
-public abstract class quantity implements pyobj{
+public abstract class quantity implements pyobj {
 
     public abstract String __str__();
     public abstract int __len__();

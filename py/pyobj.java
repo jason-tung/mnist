@@ -1,5 +1,5 @@
-package np;
-
+package py;
+import np.quantity;
 public interface pyobj {
 
     public String __str__();

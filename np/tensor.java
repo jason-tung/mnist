@@ -1,10 +1,8 @@
 package np;
 
-import java.util.Arrays;
-import java.util.Random;
-import static np.py.*;
+import java.util.*;
 
-public class tensor extends quantity{
+public class tensor extends quantity implements Iterable<int[]>{
 
     private quantity[] data;
     public int[] shape;
@@ -110,6 +108,10 @@ public class tensor extends quantity{
 
     }
 
+    public Iterator<int[]> iterator(){
+        return new iter_tensor(this);
+    }
+
     public String toString(){
         return this.__str__();
     }
@@ -138,13 +140,11 @@ public class tensor extends quantity{
 
     public static void main(String[] args){
         tensor t = tensor.rand_normal(new int[]{5, 5, 5, 5, 5, 5, 5});
-        print(t);
-        int[] inds = {4, 3};
-        print(t.g(inds));
-        int[] inds2 = {4};
-        print(t.g(inds2));
-        t.s(inds, 3290.234234);
-        print(t);
+
+        for(int[] a : t){
+            System.out.println(Arrays.toString(a));
+            System.out.println(t.g(a));
+        }
     }
 
 }
