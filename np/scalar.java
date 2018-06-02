@@ -4,6 +4,7 @@ public class scalar extends quantity{
 
     private Double data;
 
+    public quantity[] __data__(){throw new UnsupportedOperationException("Use val() for scalars, data() on tensors");}
 
     public scalar(Double value){
         this.data = value;

@@ -120,6 +120,10 @@ public class tensor extends quantity{
         throw new UnsupportedOperationException("You called float() on a tensor, tensors cannot be converted to float");
     }
 
+    public quantity[] __data__(){
+        return this.data;
+    }
+
 	public String __str__(){
 	    String res = "[";
 	    for(quantity q :data){

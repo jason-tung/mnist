@@ -14,6 +14,10 @@ public class py {
         return s.__val__();
     }
 
+    public static quantity[] data(pyobj s){
+        return s.__data__();
+    }
+
     public static void print(pyobj s){
         System.out.println(str(s));
     }

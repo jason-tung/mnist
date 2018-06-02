@@ -1,5 +1,6 @@
-import java.util.*;
 package np;
+import java.util.*;
+import static np.py.*;
 
 public class np {
 
@@ -18,11 +19,11 @@ public class np {
         tensor rTensor = tensor.zeros(f);
         for (int i = 0; i < x.shape[0]; i++) {
             int[] g = {i, 0};
-            Double max = x.get(g).data;
+            Double max = val(x.get(g));
             for (int j = 1; j <= x.shape[1]; j++) {
                 int[] h = {i, j};
-                if (x.get(h).data > max) {
-                    max = x.get(h).data;
+                if (val(x.get(h)) > max) {
+                    max = val(x.get(h));
                 }
             }
             int[] j = {i};

@@ -8,5 +8,7 @@ public interface pyobj {
 
     public double __val__();
 
+    public quantity[] __data__();
+
 
 }
