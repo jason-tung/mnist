@@ -4,10 +4,13 @@ import java.util.*;
 
 public class tensor extends quantity implements Iterable<int[]>{
 
-    private quantity[] data;
-    public int[] shape;
-
     //public constructors and helper classes for function passing
+
+    public interface Callable{
+
+        public abstract Double call();
+
+    }
 
     static class ones implements Callable{
         public Double call(){
@@ -40,6 +43,9 @@ public class tensor extends quantity implements Iterable<int[]>{
             return mean + r.nextGaussian()*variance;
         }
     }
+
+    private quantity[] data;
+    public int[] shape;
 
     public static tensor zeros(int[] shape){
         return new tensor(shape, new zeros(), 0);

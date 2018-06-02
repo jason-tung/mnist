@@ -50,6 +50,22 @@ public class np {
         throw new IllegalArgumentException("tensors of different shapes");
     }
 
+    public static tensor add(tensor a, tensor b){
+        if (Arrays.equals(a.shape, b.shape)){
+            int[] shape = a.shape;
+            tensor rTensor = tensor.zeros(shape);
+            for (int i = 0; i < shape[0]; i++){
+                for (int j = 0; j < shape[1]; j++){
+                    int[] currentLoc = {i,j};
+                    rTensor.set(currentLoc, val(a.get(currentLoc)) + val(b.get(currentLoc)));
+
+                }
+            }
+            return rTensor;
+        }
+        throw new IllegalArgumentException("tensors of different shapes");
+    }
+
     public static tensor exp(tensor a){
         throw new IllegalStateException("Not implemented yet, this is here so it compiles");
     }
