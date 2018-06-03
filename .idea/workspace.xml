@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ff2b935-928e-4846-8ab7-e54a5b04ceb9" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/np/Callable.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/np/np.java" afterPath="$PROJECT_DIR$/np/np.java" />
       <change beforePath="$PROJECT_DIR$/np/tensor.java" afterPath="$PROJECT_DIR$/np/tensor.java" />
-      <change beforePath="$PROJECT_DIR$/out/production/mnist/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/mnist/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/py/range.java" afterPath="$PROJECT_DIR$/py/range.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +13,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="np.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="np.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/np/np.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
@@ -40,16 +35,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tensor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Activation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/net/Activation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tensor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/np/tensor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="64" column="57" lean-forward="false" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
+            <state relative-caret-position="530">
+              <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
               <folding>
-                <element signature="e#2896#2897#0" expanded="true" />
-                <element signature="e#2940#2941#0" expanded="true" />
-                <element signature="e#3252#3253#0" expanded="true" />
-                <element signature="e#3284#3285#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3485#3486#0" expanded="true" />
+                <element signature="e#3524#3525#0" expanded="true" />
+                <element signature="e#3566#3567#0" expanded="true" />
+                <element signature="e#3610#3611#0" expanded="true" />
+                <element signature="e#3922#3923#0" expanded="true" />
+                <element signature="e#3954#3955#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,16 +110,6 @@
                 <element signature="e#940#941#0" expanded="true" />
                 <element signature="e#977#978#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pyobj.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/py/pyobj.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -220,10 +218,10 @@
         <option value="$PROJECT_DIR$/np/iter_tensor.java" />
         <option value="$PROJECT_DIR$/np/quantity.java" />
         <option value="$PROJECT_DIR$/np/Callable.java" />
-        <option value="$PROJECT_DIR$/np/tensor.java" />
         <option value="$PROJECT_DIR$/np/np.java" />
         <option value="$PROJECT_DIR$/py/range.java" />
         <option value="$PROJECT_DIR$/py/py.java" />
+        <option value="$PROJECT_DIR$/np/tensor.java" />
       </list>
     </option>
   </component>
@@ -565,10 +563,13 @@
         <state relative-caret-position="128">
           <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
           <folding>
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#3252#3253#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3485#3486#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3566#3567#0" expanded="true" />
+            <element signature="e#3610#3611#0" expanded="true" />
+            <element signature="e#3922#3923#0" expanded="true" />
+            <element signature="e#3954#3955#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -599,10 +600,13 @@
         <state relative-caret-position="1224">
           <caret line="85" column="9" lean-forward="false" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="9" />
           <folding>
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#3252#3253#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3485#3486#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3566#3567#0" expanded="true" />
+            <element signature="e#3610#3611#0" expanded="true" />
+            <element signature="e#3922#3923#0" expanded="true" />
+            <element signature="e#3954#3955#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -678,10 +682,13 @@
         <state relative-caret-position="1292">
           <caret line="91" column="47" lean-forward="true" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
           <folding>
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#3252#3253#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3485#3486#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3566#3567#0" expanded="true" />
+            <element signature="e#3610#3611#0" expanded="true" />
+            <element signature="e#3922#3923#0" expanded="true" />
+            <element signature="e#3954#3955#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -778,10 +785,13 @@
         <state relative-caret-position="256">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#3252#3253#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3485#3486#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3566#3567#0" expanded="true" />
+            <element signature="e#3610#3611#0" expanded="true" />
+            <element signature="e#3922#3923#0" expanded="true" />
+            <element signature="e#3954#3955#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -799,14 +809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" column="22" lean-forward="false" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/net/Activation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -846,14 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/np/quantity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/np/scalar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -872,19 +866,6 @@
             <element signature="e#908#909#0" expanded="true" />
             <element signature="e#940#941#0" expanded="true" />
             <element signature="e#977#978#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/np/tensor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="64" column="57" lean-forward="false" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
-          <folding>
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#3252#3253#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -932,6 +913,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/net/Activation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/np/quantity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/np/np.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -948,6 +945,22 @@
             <element signature="e#4678#4679#0" expanded="true" />
             <element signature="e#4720#4721#0" expanded="true" />
             <element signature="e#4754#4755#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/np/tensor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3485#3486#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3566#3567#0" expanded="true" />
+            <element signature="e#3610#3611#0" expanded="true" />
+            <element signature="e#3922#3923#0" expanded="true" />
+            <element signature="e#3954#3955#0" expanded="true" />
           </folding>
         </state>
       </provider>

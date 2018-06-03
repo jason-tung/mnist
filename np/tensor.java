@@ -1,7 +1,7 @@
 package np;
 
 import java.util.*;
-
+import static py.py.*;
 public class tensor extends quantity implements Iterable<int[]>{
 
     //public constructors and helper classes for function passing
@@ -107,6 +107,29 @@ public class tensor extends quantity implements Iterable<int[]>{
         scal.s(inds, newval);
 
     }
+
+    public tensor transpose(){
+        if(len(this.shape) > 2) throw new UnsupportedOperationException("I'm too stupid to implement transpose for 3D and above arrays");
+        if(len(this.shape) == 1){
+            tensor t = tensor.zeros(this.shape);
+            for(int[] i: this){
+                t.s(i, val(g(i)));
+            }
+            return t;
+        }
+        tensor t = tensor.zeros(new int[]{this.shape[1], this.shape[0]});
+        for(int[] i: this){
+            int[] n = new int[]{i[1], i[0]};
+            t.s(n, val(this.g(i)));
+        }
+        return t;
+    }
+
+    public tensor T(){
+        return this.transpose();
+    }
+
+
 
     public Iterator<int[]> iterator(){
         return new iter_tensor(this);
