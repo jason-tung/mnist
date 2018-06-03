@@ -10,5 +10,6 @@ public abstract class quantity implements pyobj {
     public abstract quantity g(int[] a, int b);
     public abstract void s(int[] a, Double newval);
 
+    public abstract tensor transpose();
 
 }

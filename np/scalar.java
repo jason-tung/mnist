@@ -39,6 +39,8 @@ public class scalar extends quantity{
         this.data = b;
     }
 
+    public tensor transpose(){throw new UnsupportedOperationException("You tried to call transpose() on a scalar");}
+
 
 
 }
