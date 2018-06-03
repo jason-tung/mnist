@@ -15,6 +15,68 @@ public class np {
     //np.argmax() goes here
     //np.
 
+    //defining an algorithm to collapse an axis for these implementations.
+
+    //iter_all returns all indices, need to iterate in a certain order - ind of select axis change the least
+
+
+    //nice hack that lets me not code anything complicated:
+    //build a new tensor with the same shape, except swap shape[0] with shape[axis]
+    //iterate through this order, but swap the axis' back for appropriate order
+
+    private static int[] swap(int[] b, int i1, int i2){
+        int[] a = b.clone();
+        int tmp = a[i1];
+        a[i1] = a[i2];
+        a[i2] = tmp;
+        return a;
+    }
+
+    public static tensor mean(tensor a, int axis){
+        if(axis >= a.shape.length) throw new IndexOutOfBoundsException();
+        tensor iter = tensor.zeros(swap(a.shape, 0, axis));
+
+        int prod = 1;
+        ArrayList<Integer> tmp = new ArrayList<>();
+        for(int i: range(a.shape.length)){
+            if(i != axis){
+                tmp.add(a.shape[i]);
+                prod *= a.shape[i];
+            }
+
+        }
+        int[] nshape = tmp.stream().mapToInt(i->i).toArray();
+
+        tensor r = tensor.zeros(nshape);
+        int[] add_to = new int[nshape.length];
+        double bucket = 0;
+        int count = 0;
+        int c = 0;
+        for(int[] i: iter){
+            if(c%prod==0 && c != 0){
+                r.set(add_to, bucket/count);
+                ArrayList<Integer> t = new ArrayList<>();
+
+
+                for(int v: range(a.shape.length)){
+                    if(v != axis){
+                        tmp.add(i[v]);
+                    }
+
+                }
+                add_to = tmp.stream().mapToInt(t2->t2).toArray();
+            }
+
+
+            int[] curr = swap(i, 0, axis);
+            c += 1;
+        }
+
+        //here so it compiles
+        return a;
+
+    }
+
     public static double mean(tensor a){
         int sum = 0;
         int count = 0;

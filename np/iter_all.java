@@ -5,14 +5,14 @@ import java.util.Iterator;
 import py.py;
 
 
-public class iter_tensor implements Iterator<int[]> {
+public class iter_all implements Iterator<int[]> {
 
     private int[] shape;
     private ArrayList<int[]> res;
     private Iterator<int[]> iter;
 
 
-    public iter_tensor(tensor t){
+    public iter_all(tensor t){
         shape = t.shape;
         res = new ArrayList<>();
         build();

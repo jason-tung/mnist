@@ -33,12 +33,12 @@ public class py {
         return new range(start, stop, step);
     }
 
-    public Integer[] list(Iterable<Integer> iter){
-        ArrayList<Integer> tmp= new ArrayList<Integer>();
-        for(Integer i: iter){
+    public <T extends Object> T[] list(Iterable<T> iter){
+        ArrayList<T> tmp= new ArrayList<T>();
+        for(T i: iter){
             tmp.add(i);
         }
-        return tmp.toArray(new Integer[tmp.size()]);
+        return tmp.toArray((T[]) new Object[tmp.size()]);
     }
 
 }

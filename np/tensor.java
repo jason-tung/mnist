@@ -132,7 +132,7 @@ public class tensor extends quantity implements Iterable<int[]>{
 
 
     public Iterator<int[]> iterator(){
-        return new iter_tensor(this);
+        return new np.iter_all(this);
     }
 
     public String toString(){
