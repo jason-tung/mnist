@@ -42,41 +42,41 @@ public class tensor extends quantity implements Iterable<int[]>{
     public int[] shape;
 
     public static tensor zeros(int[] shape){
-        return new tensor(shape, new zeros(), 0);
+        return new tensor(shape, new zeros());
     }
 
     public static tensor ones(int[] shape){
-        return new tensor(shape, new ones(), 0);
+        return new tensor(shape, new ones());
     }
 
-    public static tensor fill_function(int[] shape, Callable k){return new tensor(shape, k, 0);};
+    public static tensor fill_function(int[] shape, Callable k){return new tensor(shape, k);};
 
     public static tensor rand_normal(int[] shape){
         return rand_normal(shape, 0.0, 1.0);
     }
 
-    public static tensor rand_normal(int[] shape, Double mean, Double variance){ return new tensor(shape, new normal(mean, variance), 0); }
+    public static tensor rand_normal(int[] shape, Double mean, Double variance){ return new tensor(shape, new normal(mean, variance)); }
 
 
     //private constructor for flexible construction and helper methods
-    private tensor(int[] shape, Callable fill_func, int pos){
-        this.data = new quantity[shape[pos]];
+    private tensor(int[] shape, Callable fill_func){
+        this.data = new quantity[shape[0]];
         this.shape = shape;
-        construct(this.data, this.shape, pos, fill_func);
+        construct(this.data, this.shape, fill_func);
     }
 
     private int len(int[] obj){return obj.length;}
 
-    private void construct(quantity[] current_obj, int[] shape, int pos, Callable fill_func){
-        int val = shape[pos];
-
-        if(pos == len(shape)-1){
+    private void construct(quantity[] current_obj, int[] shape, Callable fill_func){
+        int[] nshape = Arrays.copyOfRange(shape, 1, shape.length);
+        int val = shape[0];
+        if(len(nshape)==0){
             for(int i = 0; i < val; i++){
                 current_obj[i] = new scalar(fill_func.call());
             }
         } else{
             for(int i = 0; i < val; i++){
-                tensor t = new tensor(shape, fill_func, pos+1);
+                tensor t = new tensor(nshape, fill_func);
                 current_obj[i] = t;
             }
         }
@@ -162,8 +162,8 @@ public class tensor extends quantity implements Iterable<int[]>{
     }
 
     public static void main(String[] args){
-        tensor t = tensor.ones(new int[]{5, 5, 5, 5, 5, 5, 5});
-        tensor k = tensor.ones(new int[]{5, 5, 5, 5, 5, 5, 5});
+        tensor t = tensor.ones(new int[]{5, 4});
+        tensor k = tensor.ones(new int[]{5, 4});
         tensor a = np.add(t, k);
         for(int[] v : a){
             System.out.println(a.g(v));
