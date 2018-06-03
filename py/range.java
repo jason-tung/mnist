@@ -34,7 +34,7 @@ public class range implements Iterator<Integer>, Iterable<Integer>{
     }
 
     public static void main(String[] args){
-        for(int i: new range(3, 10, 3)){
+        for(int i: new range(10, 123)){
             System.out.println(i);
         }
     }

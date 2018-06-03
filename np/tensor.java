@@ -6,25 +6,19 @@ public class tensor extends quantity implements Iterable<int[]>{
 
     //public constructors and helper classes for function passing
 
-    public interface Callable{
-
-        public abstract Double call();
-
-    }
-
-    static class ones implements Callable{
+    static class ones extends Callable{
         public Double call(){
             return 1.0;
         }
     }
 
-    static class zeros implements Callable{
+    static class zeros extends Callable{
         public Double call() {
             return 0.0;
         }
     }
 
-    static class normal implements Callable{
+    static class normal extends Callable{
         Double mean;
         Double variance;
         Random r = new Random();
@@ -55,13 +49,13 @@ public class tensor extends quantity implements Iterable<int[]>{
         return new tensor(shape, new ones(), 0);
     }
 
+    public static tensor fill_function(int[] shape, Callable k){return new tensor(shape, k, 0);};
+
     public static tensor rand_normal(int[] shape){
         return rand_normal(shape, 0.0, 1.0);
     }
 
-    public static tensor rand_normal(int[] shape, Double mean, Double variance){
-        return new tensor(shape, new normal(mean, variance), 0);
-    }
+    public static tensor rand_normal(int[] shape, Double mean, Double variance){ return new tensor(shape, new normal(mean, variance), 0); }
 
 
     //private constructor for flexible construction and helper methods
@@ -73,7 +67,7 @@ public class tensor extends quantity implements Iterable<int[]>{
 
     private int len(int[] obj){return obj.length;}
 
-    private void construct(quantity[] current_obj, int[] shape, int pos,  Callable fill_func){
+    private void construct(quantity[] current_obj, int[] shape, int pos, Callable fill_func){
         int val = shape[pos];
 
         if(pos == len(shape)-1){
@@ -145,11 +139,11 @@ public class tensor extends quantity implements Iterable<int[]>{
     }
 
     public static void main(String[] args){
-        tensor t = tensor.rand_normal(new int[]{5, 5, 5, 5, 5, 5, 5});
-
-        for(int[] a : t){
-            System.out.println(Arrays.toString(a));
-            System.out.println(t.g(a));
+        tensor t = tensor.ones(new int[]{5, 5, 5, 5, 5, 5, 5});
+        tensor k = tensor.ones(new int[]{5, 5, 5, 5, 5, 5, 5});
+        tensor a = np.add(t, k);
+        for(int[] v : a){
+            System.out.println(a.g(v));
         }
     }
 
