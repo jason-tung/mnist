@@ -4,6 +4,9 @@ import java.util.*;
 import java.lang.Math;
 import static py.py.*;
 
+/**
+ * Class with functions to manipulate tensors
+ */
 public class np {
 
     //special operations that require specification of axis
@@ -45,6 +48,12 @@ public class np {
         return tensor.zeros(rm_one(t.shape, axis));
     }
 
+    /**
+     *
+     * @param a tensor object that you want to take the mean of
+     * @param axis axis that is collapsed - the means are taken along this axis
+     * @return a tensor where entries along axis axis have been collapsed into one mean entry
+     */
     public static tensor mean(tensor a, int axis){
 
         tensor r = gen_newtensor(a, axis);
@@ -61,6 +70,11 @@ public class np {
         return r;
     }
 
+    /**
+     *
+     * @param a tensor object
+     * @return global mean of a
+     */
     public static double mean(tensor a){
         int sum = 0;
         int count = 0;
@@ -70,7 +84,12 @@ public class np {
         }
         return sum / count;
     }
-
+    /**
+     *
+     * @param a tensor object that you want to take the sum of
+     * @param axis axis that is collapsed - the sums are taken along this axis
+     * @return a tensor where entries along axis axis have been collapsed into one sum entry
+     */
     public static tensor sum(tensor a, int axis){
 
         tensor r = gen_newtensor(a, axis);
@@ -85,6 +104,11 @@ public class np {
         return r;
     }
 
+    /**
+     *
+     * @param t tensor object
+     * @return global sum of t
+     */
     public static double sum(tensor t) {
         double sum = 0;
         for(int[] i: t){
@@ -93,6 +117,12 @@ public class np {
         return sum;
     }
 
+    /**
+     *
+     * @param a tensor object that you want to take the max of
+     * @param axis axis that is collapsed - the maxes are taken along this axis
+     * @return a tensor where entries along axis axis have been collapsed into one max entry
+     */
     public static tensor max(tensor a, int axis){
 
         tensor r = gen_newtensor(a, axis);
@@ -107,6 +137,11 @@ public class np {
         return r;
     }
 
+    /**
+     *
+     * @param t tensor object
+     * @return global max of t
+     */
     public static double max(tensor t) {
         double max = val(t.get(new int[t.shape.length]));
         for(int[] i: t){
@@ -114,7 +149,12 @@ public class np {
         }
         return max;
     }
-
+    /**
+     *
+     * @param a tensor object that you want to take the min of
+     * @param axis axis that is collapsed - the mins are taken along this axis
+     * @return a tensor where entries along axis axis have been collapsed into one min entry
+     */
     public static tensor min(tensor a, int axis){
 
         tensor r = gen_newtensor(a, axis);
@@ -129,6 +169,11 @@ public class np {
         return r;
     }
 
+    /**
+     *
+     * @param t tensor object
+     * @return global min of t
+     */
     public static double min(tensor t) {
         double min = val(t.get(new int[t.shape.length]));
         for(int[] i: t){
@@ -151,6 +196,12 @@ public class np {
         return r;
     }
 
+    /**
+     * Performs matrix multiplication on two tensors a and b. Only works on 2D and lower tensors.
+     * @param a tensor object
+     * @param b tensor object
+     * @return a tensor that is equivalent to a * b
+     */
     public static tensor matmul(tensor a, tensor b){
         if(!(a.shape.length==2 && b.shape.length==2)) throw new IllegalArgumentException("both tensors in matmul must be 2D");
         if(!(a.shape[1] == b.shape[0])) throw new IllegalArgumentException("Cannot multiply tensors because cols a != rows b");
@@ -161,6 +212,12 @@ public class np {
         return r;
     }
 
+    /**
+     * Finds the dot product of two 1D tensors
+     * @param a tensor object
+     * @param b tensor object
+     * @return a dot b
+     */
     public static double dot(tensor a, tensor b){
         if(!(a.shape.length==1 && b.shape.length==1)) throw new IllegalArgumentException("both tensors in dot product must be 1D");
         if(!(a.shape[0]==b.shape[0])) throw new IllegalArgumentException("1D vectors don't have the same length");
@@ -177,14 +234,25 @@ public class np {
     //regular arithmetic /logical operators for two tensors
     //These now support ndarrays now that tensor is iterable, all arithmetic operators are here:
 
-    public static boolean equal(tensor arr1, tensor arr2) {
-        if(!Arrays.equals(arr1.shape, arr2.shape)) return false;
-        for(int[] i: arr1){
-            if (val(arr1.g(i)) != val(arr2.g(i))) return false;
+    /**
+     *
+     * @param t1 tensor object
+     * @param t2 tensor object
+     * @return boolean that is true is t1 is equivalent to t2 otherwise false
+     */
+    public static boolean equal(tensor t1, tensor t2) {
+        if(!Arrays.equals(t1.shape, t2.shape)) return false;
+        for(int[] i: t1){
+            if (val(t1.g(i)) != val(t2.g(i))) return false;
         } return true;
     }
 
-
+    /**
+     * Creates a new tensor where each element is the corresponding element in a - the corresponding element in b
+     * @param a tensor object
+     * @param b tensor object
+     * @return tensor that is the element-wise subtraction of a and b (a-b)
+     */
     public static tensor subtract(tensor a, tensor b) {
         if (Arrays.equals(a.shape, b.shape)) {
             tensor rTensor = tensor.zeros(a.shape);
@@ -195,7 +263,12 @@ public class np {
         }
         throw new IllegalArgumentException("tensors of different shapes");
     }
-
+    /**
+     * Creates a new tensor where each element is the corresponding element in a * the corresponding element in b
+     * @param a tensor object
+     * @param b tensor object
+     * @return tensor that is the element-wise multiplication of a and b (a*b)
+     */
     public static tensor multiply(tensor a, tensor b) {
         if (Arrays.equals(a.shape, b.shape)) {
             tensor rTensor = tensor.zeros(a.shape);
@@ -206,7 +279,12 @@ public class np {
         }
         throw new IllegalArgumentException("tensors of different shapes");
     }
-
+    /**
+     * Creates a new tensor where each element is the corresponding element in a + the corresponding element in b
+     * @param a tensor object
+     * @param b tensor object
+     * @return tensor that is the element-wise addition of a and b (a+b)
+     */
     public static tensor add(tensor a, tensor b) {
         if (Arrays.equals(a.shape, b.shape)) {
             tensor rTensor = tensor.zeros(a.shape);
@@ -217,6 +295,13 @@ public class np {
         }
         throw new IllegalArgumentException("tensors of different shapes");
     }
+
+    /**
+     * Creates a new tensor where each element is the corresponding element in a / the corresponding element in b
+     * @param a tensor object
+     * @param b tensor object
+     * @return tensor that is the element-wise division of a and b (a/b)
+     */
 
     public static tensor divide(tensor a, tensor b) {
         if (Arrays.equals(a.shape, b.shape)) {
@@ -231,6 +316,18 @@ public class np {
 
     //single tensor regular operators
 
+    /**
+     * Loops through each element in a and applies k.call(element) to it. The aggregation of the results from each
+     * call form a new tensor that is returned. For example if the call(double) in a callable is defined as:
+     * public Double call(double d){return d*2;}
+     *
+     * vectorize(t, callable) will return a tensor where each element in t is multiplied by 2
+     *
+     * @param a tensor object
+     * @param k Callable object with Double call(double) defined
+     * @return a new tensor where each element from a is modified by k
+     */
+
     public static tensor vectorize(tensor a, Callable k){
         tensor rTensor = tensor.zeros(a.shape);
         for (int[] index : a) {
@@ -238,6 +335,7 @@ public class np {
         }
         return rTensor;
     }
+
 
     public static tensor log(tensor a, double base) {
         tensor rTensor = tensor.zeros(a.shape);
@@ -273,7 +371,11 @@ public class np {
 
     //additional constructors for tensor
 
-    ///make identity matrix
+    /**
+     *
+     * @param n number of rows and cols
+     * @return a 2D tensor that represents the identity matrix of size n
+     */
     public static tensor eye(int n){
         tensor t = tensor.zeros(new int[]{n, n});
         for(int i: range(n)){
@@ -284,17 +386,24 @@ public class np {
 
     public static void main(String[] args){
         tensor a = tensor.rand_normal(new int[]{3, 4});
+        tensor c = tensor.rand_normal(new int[]{3, 4});
         System.out.println(a);
 
         System.out.println(max(a, 1));
 
-//        System.out.println(mean(a, 1));
+        System.out.println(mean(a, 1));
 
-//        tensor q = np.add(a, c) ;
-//        tensor b = tensor.ones(new int[]{3, 2});
-//
-//
-//        System.out.println(matmul(q, b));
+        tensor q = np.add(a, c) ;
+        tensor b = tensor.ones(new int[]{4, 2});
+
+
+        tensor k = matmul(q, b);
+
+        print(k);
+
+        tensor z = matmul(k, eye(2));
+        print(z);
+
     }
 
 

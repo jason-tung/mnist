@@ -1,8 +1,25 @@
 package np;
-
 import java.util.*;
 import static py.py.*;
+
+/**
+ * Implementation of tensors (ndarrays) in java
+ */
 public class tensor extends quantity implements Iterable<int[]>{
+
+    private class scalar extends quantity{
+        private Double data;
+        public quantity[] __data__(){throw new UnsupportedOperationException("Use val() for scalars, data() on tensors");}
+        public scalar(Double value){ this.data = value; }
+        public String toString(){ return __str__(); }
+        public String __str__(){ return Double.toString(data); }
+        public double __val__(){ return this.data; }
+        public int __len__(){ throw new UnsupportedOperationException("You tried to call len() on a scalar, scalars don't have a length!"); }
+        public Object g(){ return __val__(); }
+        public quantity g(int[] a, int b){ return this; }
+        public void s(int[] a, Double b){this.data = b; }
+        public tensor transpose(){throw new UnsupportedOperationException("You tried to call transpose() on a scalar");}
+    }
 
     //public constructors and helper classes for function passing
 
@@ -41,19 +58,51 @@ public class tensor extends quantity implements Iterable<int[]>{
     private quantity[] data;
     public int[] shape;
 
+    /**
+     *
+     * @param shape desired shape of the resulting tensor
+     * @return tensor filled with zeros of shape shape
+     */
+
     public static tensor zeros(int[] shape){
         return new tensor(shape, new zeros());
     }
+
+    /**
+     *
+     * @param shape desired shape of the resulting tensor
+     * @return tensor filled with ones of shape shape
+     */
 
     public static tensor ones(int[] shape){
         return new tensor(shape, new ones());
     }
 
+    /**
+     *
+     * @param shape desired shape of the resulting tensor
+     * @param k A callable object where Double call() is defined
+     * @return tensor filled by a user-defined function of shape shape
+     */
+
     public static tensor fill_function(int[] shape, Callable k){return new tensor(shape, k);};
 
+    /**
+     *
+     * @param shape desired shape of the resulting tensor
+     * @return tensor filled from a gaussian distribution of shape shape. mean = 0, variance = 1
+     */
     public static tensor rand_normal(int[] shape){
         return rand_normal(shape, 0.0, 1.0);
     }
+
+    /**
+     *
+     * @param shape desired shape of the resulting tensor
+     * @param mean mean of gaussian distribution
+     * @param variance variance of gaussian distribution
+     * @return tensor filled from a gaussian distribution of shape shape. mean = mean, variance = variance.
+     */
 
     public static tensor rand_normal(int[] shape, Double mean, Double variance){ return new tensor(shape, new normal(mean, variance)); }
 
@@ -84,13 +133,31 @@ public class tensor extends quantity implements Iterable<int[]>{
 
     //getters, setters, and toString
 
+    /**
+     * Alias for tensor.g()
+     * @param inds
+     * @return
+     */
+
     public quantity get(int[] inds){
         return g(inds);
     }
 
+    /**
+     * Alias fr tensor.s()
+     * @param inds
+     * @param newval
+     */
+
     public void set(int[] inds, Double newval){
         s(inds, newval);
     }
+
+    /**
+     * returns the value of an index in the tensor
+     * @param inds An index in the tensor you want to retrieves
+     * @return Quantity object located at inds
+     */
 
     public quantity g(int[] inds){
         return g(inds, 0);
@@ -101,12 +168,24 @@ public class tensor extends quantity implements Iterable<int[]>{
         return data[inds[pos]].g(inds, pos+1);
     }
 
+    /**
+     * Changes the value of one scalar in the tensor.
+     *
+     * @param inds the index of the area in the tensor you want to change
+     * @param newval the value you want to change the entry in tensor[inds] to
+     */
+
     public void s(int[] inds, Double newval){
         if(len(inds) != len(shape)) throw new UnsupportedOperationException("Cannot set value for entire tensors");
         quantity scal = g(inds);
         scal.s(inds, newval);
 
     }
+
+    /**
+     *
+     * @return a tensor that represents the transpose of the current tensor. Only works on 2D and under tensors.
+     */
 
     public tensor transpose(){
         if(len(this.shape) > 2) throw new UnsupportedOperationException("I'm too stupid to implement transpose for 3D and above arrays");
@@ -129,13 +208,39 @@ public class tensor extends quantity implements Iterable<int[]>{
         return this.transpose();
     }
 
+    /**
+     * @param c Callable object with call_bool defined - call_bool returns a boolean given a double
+     * @return an ArrayList of all indices in the tensor where the value meets the criteria in call_bool
+     */
+    public ArrayList<int[]> find(Callable c){
+        ArrayList<int[]> res = new ArrayList<>();
+        for(int[] i: this) {
+            if (c.call_bool(val(this.g(i)))) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
 
+    /**
+     *
+     * @return an iterator that returns tensor indices in a pre-order transversal
+     */
 
     public Iterator<int[]> iterator(){
         return new iter_all(this);
     }
 
-    //iterates through all values of an array but through a certain axis
+    /**For example assume I have tensor
+     *  1 2 3
+     *  4 5 6
+     *  The iteration over defined inside iterator would take this order: 1, 2, 3, 4, 5, 6 - primarily iterating over the last axis (cols). The cols axis changes the most.
+     *  What if I wanted to iterate over the rows axis instead? In order 1, 4, 2, 5, 3, 6?
+     *  ordered_iterate implements this functionality. Rows are axis = 0, so ordered_iterate(0) would do the job.
+     *
+     * @param axis The axis to iterate over
+     * @return an ArrayList of indices in order where the given axis changes the most
+     */
     public int[][] ordered_iterate(int axis){
         if(axis >= this.shape.length) throw new IndexOutOfBoundsException();
         tensor iter = tensor.zeros(swap(this.shape, this.shape.length-1, axis));
@@ -146,6 +251,11 @@ public class tensor extends quantity implements Iterable<int[]>{
         return res.toArray(new int[res.size()][]);
 
     }
+
+    /**
+     *
+     * @return a string representation of the tensor
+     */
 
     public String toString(){
         return this.__str__();

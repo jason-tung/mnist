@@ -35,7 +35,6 @@ public class Preprocessing{
         for(int[] i: t){
             r.s(new int[]{i[0], (int) val(t.g(i))}, 1.0);
         }
-
         return r;
     }
 
