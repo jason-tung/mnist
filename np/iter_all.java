@@ -19,7 +19,7 @@ public class iter_all implements Iterator<int[]> {
     }
 
     private void build(){
-        buildhelp(new ArrayList<Integer>(), 0);
+        buildhelp(new ArrayList<>(), 0);
         iter = res.iterator();
     }
 

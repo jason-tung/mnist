@@ -17,64 +17,49 @@ public class np {
 
     //defining an algorithm to collapse an axis for these implementations.
 
-    //iter_all returns all indices, need to iterate in a certain order - ind of select axis change the least
+    //iter_all returns all indices, need to iterate in a certain order - ind of select axis change most
 
 
     //nice hack that lets me not code anything complicated:
-    //build a new tensor with the same shape, except swap shape[0] with shape[axis]
+    //build a new tensor with the same shape, except swap shape's last index with shape[axis]
     //iterate through this order, but swap the axis' back for appropriate order
+    //this iterates through everything through a certain axis really nicely
 
-    private static int[] swap(int[] b, int i1, int i2){
-        int[] a = b.clone();
-        int tmp = a[i1];
-        a[i1] = a[i2];
-        a[i2] = tmp;
-        return a;
+    private static int[] rm_one(int[] ar, int i){
+        if(i >= ar.length) throw new IndexOutOfBoundsException();
+        ArrayList<Integer> tmp = new ArrayList<>();
+        for(int v: range(ar.length)){
+            if (v != i){
+                tmp.add(ar[v]);
+            }
+        }
+        return tmp.stream().mapToInt(z->z).toArray();
+    }
+
+    private static ArrayList<int[][]> build_partitions(tensor t, int axis){
+        if(axis >= t.shape.length) throw new IndexOutOfBoundsException();
+        int[][] v = t.ordered_iterate(axis);
+        return partition(v, t.shape[axis]);
+    }
+
+    private static tensor gen_newtensor(tensor t, int axis){
+        return tensor.zeros(rm_one(t.shape, axis));
     }
 
     public static tensor mean(tensor a, int axis){
-        if(axis >= a.shape.length) throw new IndexOutOfBoundsException();
-        tensor iter = tensor.zeros(swap(a.shape, 0, axis));
 
-        int prod = 1;
-        ArrayList<Integer> tmp = new ArrayList<>();
-        for(int i: range(a.shape.length)){
-            if(i != axis){
-                tmp.add(a.shape[i]);
-                prod *= a.shape[i];
+        tensor r = gen_newtensor(a, axis);
+        ArrayList<int[][]> partitions = build_partitions(a, axis);
+        for(int[][] i: partitions){
+            int count = 0;
+            double sum = 0;
+            for(int[] index:i){
+                count += 1;
+                sum += val(a.g(index));
             }
-
+            r.set(rm_one(i[0], axis), sum / count);
         }
-        int[] nshape = tmp.stream().mapToInt(i->i).toArray();
-
-        tensor r = tensor.zeros(nshape);
-        int[] add_to = new int[nshape.length];
-        double bucket = 0;
-        int count = 0;
-        int c = 0;
-        for(int[] i: iter){
-            if(c%prod==0 && c != 0){
-                r.set(add_to, bucket/count);
-                ArrayList<Integer> t = new ArrayList<>();
-
-
-                for(int v: range(a.shape.length)){
-                    if(v != axis){
-                        tmp.add(i[v]);
-                    }
-
-                }
-                add_to = tmp.stream().mapToInt(t2->t2).toArray();
-            }
-
-
-            int[] curr = swap(i, 0, axis);
-            c += 1;
-        }
-
-        //here so it compiles
-        return a;
-
+        return r;
     }
 
     public static double mean(tensor a){
@@ -87,27 +72,40 @@ public class np {
         return sum / count;
     }
 
-    public static tensor rowMaxs(tensor x) {
-        int[] f = {x.shape[0]};
-        tensor rTensor = tensor.zeros(f);
-        for (int i = 0; i < x.shape[0]; i++) {
-            int[] g = {i, 0};
-            Double max = val(x.get(g));
-            for (int j = 1; j <= x.shape[1]; j++) {
-                int[] h = {i, j};
-                if (val(x.get(h)) > max) {
-                    max = val(x.get(h));
-                }
+    public static tensor sum(tensor a, int axis){
+
+        tensor r = gen_newtensor(a, axis);
+        ArrayList<int[][]> partitions = build_partitions(a, axis);
+        for(int[][] i: partitions){
+            double sum = 0;
+            for(int[] index:i){
+                sum += val(a.g(index));
             }
-            int[] j = {i};
-            rTensor.set(j, max);
+            r.set(rm_one(i[0], axis), sum);
         }
-        return rTensor;
+        return r;
     }
 
+    public static double sum(tensor t) {
+        double sum = 0;
+        for(int[] i: t){
+            sum += val(t.get(i));
+        }
+        return sum;
+    }
 
-    public static double sum(tensor arr) {
-        return 0;
+    public static tensor max(tensor a, int axis){
+
+        tensor r = gen_newtensor(a, axis);
+        ArrayList<int[][]> partitions = build_partitions(a, axis);
+        for(int[][] i: partitions){
+            double max = val(a.get(i[0]));
+            for(int[] index:i){
+                max = Math.max(val(a.g(index)), max);
+            }
+            r.set(rm_one(i[0], axis), max);
+        }
+        return r;
     }
 
     public static double max(tensor t) {
@@ -116,6 +114,20 @@ public class np {
             max = Math.max(max, val(t.get(i)));
         }
         return max;
+    }
+
+    public static tensor min(tensor a, int axis){
+
+        tensor r = gen_newtensor(a, axis);
+        ArrayList<int[][]> partitions = build_partitions(a, axis);
+        for(int[][] i: partitions){
+            double min = val(a.get(i[0]));
+            for(int[] index:i){
+                min = Math.min(val(a.g(index)), min);
+            }
+            r.set(rm_one(i[0], axis), min);
+        }
+        return r;
     }
 
     public static double min(tensor t) {
@@ -272,14 +284,18 @@ public class np {
     }
 
     public static void main(String[] args){
-        tensor a = tensor.ones(new int[]{3, 3});
-        tensor c = tensor.ones(new int[]{3, 3});
+        tensor a = tensor.rand_normal(new int[]{3, 4});
+        System.out.println(a);
 
-        tensor q = np.add(a, c) ;
-        tensor b = tensor.ones(new int[]{3, 2});
+        System.out.println(mean(a, 1));
 
+//        System.out.println(mean(a, 1));
 
-        System.out.println(matmul(q, b));
+//        tensor q = np.add(a, c) ;
+//        tensor b = tensor.ones(new int[]{3, 2});
+//
+//
+//        System.out.println(matmul(q, b));
     }
 
 

@@ -135,6 +135,18 @@ public class tensor extends quantity implements Iterable<int[]>{
         return new iter_all(this);
     }
 
+    //iterates through all values of an array but through a certain axis
+    public int[][] ordered_iterate(int axis){
+        if(axis >= this.shape.length) throw new IndexOutOfBoundsException();
+        tensor iter = tensor.zeros(swap(this.shape, this.shape.length-1, axis));
+        ArrayList<int[]> res = list(iter);
+        for(int[] i:res){
+            swap2(i, this.shape.length-1, axis);
+        }
+        return res.toArray(new int[res.size()][]);
+
+    }
+
     public String toString(){
         return this.__str__();
     }
@@ -165,8 +177,9 @@ public class tensor extends quantity implements Iterable<int[]>{
         tensor t = tensor.ones(new int[]{5, 4});
         tensor k = tensor.ones(new int[]{5, 4});
         tensor a = np.add(t, k);
-        for(int[] v : a){
-            System.out.println(a.g(v));
+        System.out.println(list(a).getClass());
+        for(int[] v : a.ordered_iterate(1)){
+            System.out.println(Arrays.toString(v));
         }
     }
 
