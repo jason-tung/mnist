@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ff2b935-928e-4846-8ab7-e54a5b04ceb9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/net/Network.java" afterPath="$PROJECT_DIR$/net/Network.java" />
-      <change beforePath="$PROJECT_DIR$/net/Preprocessing.java" afterPath="$PROJECT_DIR$/net/Preprocessing.java" />
-      <change beforePath="$PROJECT_DIR$/np/np.java" afterPath="$PROJECT_DIR$/np/np.java" />
-      <change beforePath="$PROJECT_DIR$/out/production/mnist/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/mnist/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="2ff2b935-928e-4846-8ab7-e54a5b04ceb9" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
