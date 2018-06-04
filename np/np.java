@@ -13,7 +13,6 @@ public class np {
     //Actually it'll just be easier if for these methods we do 2D only
 
     //np.argmax() goes here
-    //np.
 
     //defining an algorithm to collapse an axis for these implementations.
 
@@ -31,10 +30,10 @@ public class np {
         for(int v: range(ar.length)){
             if (v != i){
                 tmp.add(ar[v]);
-            }
         }
-        return tmp.stream().mapToInt(z->z).toArray();
     }
+        return tmp.stream().mapToInt(z->z).toArray();
+}
 
     private static ArrayList<int[][]> build_partitions(tensor t, int axis){
         if(axis >= t.shape.length) throw new IndexOutOfBoundsException();
@@ -287,7 +286,7 @@ public class np {
         tensor a = tensor.rand_normal(new int[]{3, 4});
         System.out.println(a);
 
-        System.out.println(mean(a, 1));
+        System.out.println(max(a, 1));
 
 //        System.out.println(mean(a, 1));
 
