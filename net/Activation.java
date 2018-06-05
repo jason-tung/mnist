@@ -34,25 +34,24 @@ public class Activation {
         return Math.max(0, x);
     }
 
-    private static tensor softmax(tensor x) {
-        tensor max = np.max(x, 0);
+    public static tensor expand(tensor x, tensor oneD) {
         tensor newarray = tensor.zeros(x.shape);
         for (int i = 0; i < x.shape[0]; i++) {
             for (int j = 0; j < x.shape[1]; j++) {
                 int[] loc = {i, j};
                 int[] maxloc = {i};
-                newarray.s(loc, py.val(max.g(maxloc)));
+                newarray.s(loc, py.val(oneD.g(maxloc)));
             }
         }
+        return newarray;
+    }
+
+    private static tensor softmax(tensor x) {
+        tensor max = np.max(x, 0);
+        tensor newarray = expand(x, max);
         tensor difference = np.exp(np.subtract(x,newarray));
         tensor sumdiff = np.sum(difference, 1);
-        for (int i = 0; i < x.shape[0]; i++) {
-            for (int j = 0; j < x.shape[1]; j++) {
-                int[] loc = {i, j};
-                int[] maxloc = {i};
-                newarray.s(loc, py.val(sumdiff.g(maxloc)));
-            }
-        }
+        newarray = expand(x, sumdiff);
         tensor dog = np.divide(difference, newarray);
         return dog;
     }
