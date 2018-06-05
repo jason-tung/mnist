@@ -17,6 +17,7 @@ public class Activation {
         switch (callType) {
             case "relu":
                 return relu(x);
+                //--------------------------------------------- TO BE FIXED LATER ---------------------------------------------------------------------------------------------------
 //            case "softmax":
 //                return softmax(x);
             case "sigmoid":
