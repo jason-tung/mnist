@@ -9,6 +9,7 @@ public class Activation {
 
     public Activation(String s) {
         callType = s;
+        apply(10); //Catch errors in the constructor without repeating the switch statement with a test
     }
 
     //applies a function class as an actual function
@@ -16,14 +17,14 @@ public class Activation {
         switch (callType) {
             case "relu":
                 return relu(x);
-            case "softmax":
-                return softmax(x);
+//            case "softmax":
+//                return softmax(x);
             case "sigmoid":
                 return sigmoid(x);
             case "tanh":
                 return tanh(x);
-            //add a default here that throws an error that says invalid activation function
         }
+        throw new IllegalArgumentException("The activation you specified is invalid");
     }
 
     //static math functions
@@ -31,31 +32,30 @@ public class Activation {
         return Math.max(0, x);
     }
 
-    private static double softmax(double x) {
-
-        //tensor maximus = x.rowMaxs;
-        return 0.0;
-
-    }
-
-    private static tensor rowMaxs(tensor x) {
-        int[] f = {x.shape[0]};
-        tensor rTensor = tensor.zeros(f);
-        for (int i = 0; i < x.shape[0]; i++) {
-            int[] g = {i, 0};
-            Double max = x.get(g).data;
-            for (int j = 1; j <= x.shape[1]; j++) {
-                int[] h = {i, j};
-                if (x.get(h).data > max) {
-                    max = x.get(h).data;
-                }
-            }
-            int[] j = {i};
-            rTensor.set(j, max);
-        }
-        return rTensor;
-    }
-
+//    private static tensor softmax(tensor x) {
+//	tensor max = np.max(x, 0);
+//	tensor newarray = tensor.zeros(x.shape);
+//	for (int i = 0; i < x[0]; i++){
+//	    for (int j = 0; j < x[1]; j++){
+//		int[] loc = {i,j};
+//		int[] maxloc = {i};
+//		newarray.s(loc, max.g(i));
+//	    }
+//	}
+//	tensor difference = np.exp(x.subtract(newarray));
+//	tensor sumdiff = np.sum(difference, 1);
+//	for (int i = 0; i < x[0]; i++){
+//	    for (int j = 0; j < x[1]; j++){
+//		int[] loc = {i, j};
+//		int[] maxloc = {i};
+//		newarray.s(loc, sumdiff.g(i));
+//	    }
+//	}
+//	tensor dog = np.divide(difference, sumdiff);
+//	return dog;
+//    }
+    
+    
     private static double sigmoid(double x) {
         return 1 / (1 + Math.exp(-x));
     }
