@@ -3,6 +3,7 @@ package net;
 //import java.util.*;
 
 import np.*;
+import py.*;
 
 public class Activation {
     private String callType;
@@ -17,7 +18,7 @@ public class Activation {
         switch (callType) {
             case "relu":
                 return relu(x);
-                //--------------------------------------------- TO BE FIXED LATER ---------------------------------------------------------------------------------------------------
+            //--------------------------------------------- TO BE FIXED LATER ---------------------------------------------------------------------------------------------------
 //            case "softmax":
 //                return softmax(x);
             case "sigmoid":
@@ -33,30 +34,30 @@ public class Activation {
         return Math.max(0, x);
     }
 
-//    private static tensor softmax(tensor x) {
-//	tensor max = np.max(x, 0);
-//	tensor newarray = tensor.zeros(x.shape);
-//	for (int i = 0; i < x[0]; i++){
-//	    for (int j = 0; j < x[1]; j++){
-//		int[] loc = {i,j};
-//		int[] maxloc = {i};
-//		newarray.s(loc, max.g(i));
-//	    }
-//	}
-//	tensor difference = np.exp(x.subtract(newarray));
-//	tensor sumdiff = np.sum(difference, 1);
-//	for (int i = 0; i < x[0]; i++){
-//	    for (int j = 0; j < x[1]; j++){
-//		int[] loc = {i, j};
-//		int[] maxloc = {i};
-//		newarray.s(loc, sumdiff.g(i));
-//	    }
-//	}
-//	tensor dog = np.divide(difference, sumdiff);
-//	return dog;
-//    }
-    
-    
+    private static tensor softmax(tensor x) {
+        tensor max = np.max(x, 0);
+        tensor newarray = tensor.zeros(x.shape);
+        for (int i = 0; i < x.shape[0]; i++) {
+            for (int j = 0; j < x.shape[1]; j++) {
+                int[] loc = {i, j};
+                int[] maxloc = {i};
+                newarray.s(loc, py.val(max.g(maxloc)));
+            }
+        }
+        tensor difference = np.exp(np.subtract(x,newarray));
+        tensor sumdiff = np.sum(difference, 1);
+        for (int i = 0; i < x.shape[0]; i++) {
+            for (int j = 0; j < x.shape[1]; j++) {
+                int[] loc = {i, j};
+                int[] maxloc = {i};
+                newarray.s(loc, py.val(sumdiff.g(maxloc)));
+            }
+        }
+        tensor dog = np.divide(difference, newarray);
+        return dog;
+    }
+
+
     private static double sigmoid(double x) {
         return 1 / (1 + Math.exp(-x));
     }
