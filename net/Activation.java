@@ -18,14 +18,16 @@ public class Activation {
         switch (callType) {
             case "relu":
                 return relu(x);
-            //--------------------------------------------- TO BE FIXED LATER ---------------------------------------------------------------------------------------------------
-//            case "softmax":
-//                return softmax(x);
             case "sigmoid":
                 return sigmoid(x);
             case "tanh":
                 return tanh(x);
         }
+        throw new IllegalArgumentException("The activation you specified is invalid");
+    }
+
+    public tensor apply(tensor x){
+        if (callType.equals("softmax")) return softmax(x);
         throw new IllegalArgumentException("The activation you specified is invalid");
     }
 
