@@ -25,10 +25,10 @@ public class Preprocessing {
     }
 
     public static tensor imgToTensor(BufferedImage img) {
-        int[] shape = {28,28,3};
+        int[] shape = {img.getHeight(),img.getWidth(),3};
         tensor rgb =  tensor.zeros(shape);
-        for (int i = 0; i < 28; i++) {
-            for (int j = 0; j < 28; j++) {
+        for (int i = 0; i < img.getHeight(); i++) {
+            for (int j = 0; k < img.getWidth(); j++) {
                 int[] loc0= {i,j,0};
                 int[] loc1= {i,j,1};
                 int[] loc2= {i,j,2};
