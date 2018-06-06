@@ -2,7 +2,7 @@ package net;
 import np.*;
 import py.*;
 
-public abstract class LossFunction {
+public class LossFunction {
     public String callType;
 
     public LossFunction(String s) {
@@ -21,13 +21,13 @@ public abstract class LossFunction {
         throw new IllegalArgumentException("The function you specified is invalid");
     }
 
-    public double meanSquared(tensor output, tensor onehot){
-        double totSquares = 0;
+    public tensor meanSquared(tensor output, tensor onehot){
+        tensor lossFunc = tensor.zeros(output.shape);
         for (int i = 0; i < output.shape[0]; i++){
             int[] loc = {i};
-            totSquares += Math.pow(py.val(output.get(i)) - py.val(onehot.get(i)), 2);
+            lossFunc.s(loc, Math.pow(py.val(output.get(loc)) - py.val(onehot.get(loc)), 2));
         }
-        return totSquares / output.shape[0];
+        return lossFunc;
     }
 }
 

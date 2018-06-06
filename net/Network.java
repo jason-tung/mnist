@@ -14,7 +14,7 @@ public class Network{
     double bias;
 
     public Network(int numLayers, int numNodes, String activFunct, String lossFunc, String descent_mode, double bias){
-        loss_function = lossFunc;
+        loss_function = new LossFunction(lossFunc);
         count_layers = numLayers;
         count_nodes = numNodes;
         this.descent_mode = descent_mode;
