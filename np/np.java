@@ -48,6 +48,19 @@ public class np {
         return tensor.zeros(rm_one(t.shape, axis));
     }
 
+    private static tensor keepdims(tensor ntensor, int[] oldshape, int axis){
+	    int[] nshape = t.oldshape.clone();
+	    nshape[axis] = 1;
+	    tensor r = tensor.zeros(nshape);
+	    ArrayList<int[]> minds = list(ntensor);
+	    ArrayList<int[]> ninds = list(r);
+	    for(int i: range(minds.size())){
+		r.s(ninds.get(i), val(ntensor.g(ninds[i])));
+	    }
+	    return r;
+    }
+	
+
     /**
      *
      * @param a tensor object that you want to take the mean of
@@ -69,6 +82,17 @@ public class np {
         }
         return r;
     }
+
+    public static tensor mean(tensor a, int axis, boolean keepdims){
+	if (keepdims){
+
+	    
+	}
+	else{
+	    return mean(a, axis);
+	}
+    }
+	    
 
     /**
      *
