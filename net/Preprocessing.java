@@ -24,22 +24,26 @@ public class Preprocessing {
         return img;
     }
 
-    public static int[][][] imgToArray(BufferedImage img) {
-        int[][][] rgb = new int[28][28][3];
+    public static tensor imgToTensor(BufferedImage img) {
+        int[] shape = {28,28,3};
+        tensor rgb =  tensor.zeros(shape);
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
+                int[] loc0= {0,i,j};
+                int[] loc1= {1,i,j};
+                int[] loc2= {2,i,j};
                 Color color = new Color(img.getRGB(i, j));
-                rgb[i][j][0] = color.getRed();
-                rgb[i][j][1] = color.getGreen();
-                rgb[i][j][2] = color.getBlue();
+                rgb.set(loc0, (double) color.getRed());
+                rgb.set(loc1, (double) color.getGreen());
+                rgb.set(loc2, (double) color.getBlue());
             }
         }
         return rgb;
     }
 
     //returns an image in the form of an int[][][] in rgb format, numbers should be from 0-256
-    public static int[][][] parse(String fileName) { // should be in form (rows, cols, channels)
-        return imgToArray(openFile(fileName));
+    public static tensor parse(String fileName) { // should be in form (rows, cols, channels)
+        return imgToTensor(openFile(fileName));
     }
 
     //takes an ndimensional tensor and collapses it into a 1D tensor

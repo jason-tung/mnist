@@ -6,7 +6,7 @@ import np.*;
 import py.*;
 
 public class Activation {
-    private String callType;
+    public String callType;
 
     public Activation(String s) {
         callType = s;
