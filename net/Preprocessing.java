@@ -28,7 +28,7 @@ public class Preprocessing {
         int[] shape = {img.getHeight(),img.getWidth(),3};
         tensor rgb =  tensor.zeros(shape);
         for (int i = 0; i < img.getHeight(); i++) {
-            for (int j = 0; k < img.getWidth(); j++) {
+            for (int j = 0; j < img.getWidth(); j++) {
                 int[] loc0= {i,j,0};
                 int[] loc1= {i,j,1};
                 int[] loc2= {i,j,2};
