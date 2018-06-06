@@ -23,6 +23,17 @@ public class Preprocessing {
         }
     }
 
+    public static tensor imgToTensor(BufferedImage img){
+        int[] shape = {28, 28};
+        tensor rTensor = tensor.zeros(shape);
+        for (int i = 0; i < 28; i++){
+            for (int j = 0; j < 28; j++){
+                int[] loc = {i,j};
+                rTensor.set(loc, img.getRBG(i,j));
+        }
+        return rTensor;
+    }
+
     //returns an image in the form of an int[][][] in rgb format, numbers should be from 0-256
     public static int[][][] parse(String s) { // should be in form (rows, cols, channels)
         throw new IllegalStateException("Not implemented yet, this is here so it compiles");
