@@ -31,7 +31,7 @@ public class Preprocessing {
             for (int j = 0; j < 28; j++) {
                 int[] loc0= {i,j,0};
                 int[] loc1= {i,j,1};
-                int[] loc2= ,i,j,2};
+                int[] loc2= {i,j,2};
                 Color color = new Color(img.getRGB(i, j));
                 rgb.set(loc0, (double) color.getRed());
                 rgb.set(loc1, (double) color.getGreen());
