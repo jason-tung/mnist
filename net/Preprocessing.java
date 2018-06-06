@@ -5,10 +5,9 @@ import np.*;
 import static py.py.*;
 
 import java.util.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
 
 public class Preprocessing {
 
@@ -21,15 +20,17 @@ public class Preprocessing {
             System.out.println("bad filename");
             e.printStackTrace();
         }
+        return null;
     }
 
     public static tensor imgToTensor(BufferedImage img){
         int[] shape = {28, 28};
         tensor rTensor = tensor.zeros(shape);
         for (int i = 0; i < 28; i++){
-            for (int j = 0; j < 28; j++){
-                int[] loc = {i,j};
-                rTensor.set(loc, img.getRBG(i,j));
+            for (int j = 0; j < 28; j++) {
+                int[] loc = {i, j};
+                rTensor.set(loc, (double)img.getRGB(i, j));
+            }
         }
         return rTensor;
     }
