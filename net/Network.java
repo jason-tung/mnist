@@ -12,6 +12,8 @@ public class Network{
     String descent_mode;
     Activation activation_function;
     double bias;
+    public Layer input_layer;
+    public Layer output_layer;
 
     public Network(int numLayers, int numNodes, String activFunct, String lossFunc, String descent_mode, double bias){
         loss_function = new LossFunction(lossFunc);
@@ -22,7 +24,12 @@ public class Network{
         this.bias = bias;
     }
 
-
+    public tensor getOneHot(){
+        return null;
+    }
+    public tensor getCost(tensor oneHot){
+        return loss_function.call(output_layer.activations, oneHot);
+    }
 
     //descent
     public void fit(){
@@ -43,7 +50,7 @@ public class Network{
             int[] shape = {i};
             activationSum += py.val(activation.g(shape)) * py.val(weights.g(shape));
         }
-        return activation_function.apply(activationSum);
+        return activation_function.apply(activationSum - bias);
     }
 
     //takes in file name and predicts number
@@ -57,8 +64,10 @@ public class Network{
 }
 
 class Layer{
-    tensor iWeights;
-    tensor oWeights;
-    tensor activations;
+    public tensor iWeights;
+    public tensor oWeights;
+    public tensor activations;
+
+
 
 }
