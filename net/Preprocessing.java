@@ -6,6 +6,7 @@ import static py.py.*;
 
 import java.util.*;
 import java.awt.image.*;
+import java.awt.*;
 import java.io.*;
 import javax.imageio.*;
 
@@ -13,31 +14,32 @@ public class Preprocessing {
 
     public static BufferedImage openFile(String fileName) {
         File file = new File(fileName);
+        BufferedImage img = null;
         try {
-            return ImageIO.read(file);
-        }
-        catch(Exception e){
+            img = ImageIO.read(file);
+        } catch (Exception e) {
             System.out.println("bad filename");
             e.printStackTrace();
         }
-        return null;
+        return img;
     }
 
-    public static tensor imgToTensor(BufferedImage img){
-        int[] shape = {28, 28};
-        tensor rTensor = tensor.zeros(shape);
-        for (int i = 0; i < 28; i++){
+    public static int[][][] imgToArray(BufferedImage img) {
+        int[][][] rgb = new int[28][28][3];
+        for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
-                int[] loc = {i, j};
-                rTensor.set(loc, (double)img.getRGB(i, j));
+                Color color = new Color(img.getRGB(i, j));
+                rgb[i][j][0] = color.getRed();
+                rgb[i][j][1] = color.getGreen();
+                rgb[i][j][2] = color.getBlue();
             }
         }
-        return rTensor;
+        return rgb;
     }
 
     //returns an image in the form of an int[][][] in rgb format, numbers should be from 0-256
-    public static int[][][] parse(String s) { // should be in form (rows, cols, channels)
-        throw new IllegalStateException("Not implemented yet, this is here so it compiles");
+    public static int[][][] parse(String fileName) { // should be in form (rows, cols, channels)
+        return imgToArray(openFile(fileName));
     }
 
     //takes an ndimensional tensor and collapses it into a 1D tensor
