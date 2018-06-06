@@ -23,11 +23,21 @@ public class Network{
         activation_function = new Activation(activFunct);
         this.bias = bias;
     }
-
-    public tensor getOneHot(){
+    
+    //to be implemented
+    public tensor getOneHot(String filename){
         return null;
     }
-    public tensor getCost(tensor oneHot){
+
+    public tensor getCostFunction(){
+        int[] shape = {count_nodes};
+        tensor costFunction = tensor.zeros(shape);
+        //for all the files:
+            //costFunction.s(NUMBER, getCost(oneHot));
+        return costFunction;
+    }
+
+    public double getCost(tensor oneHot){
         return loss_function.call(output_layer.activations, oneHot);
     }
 
