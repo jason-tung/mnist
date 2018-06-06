@@ -29,9 +29,9 @@ public class Preprocessing {
         tensor rgb =  tensor.zeros(shape);
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
-                int[] loc0= {0,i,j};
-                int[] loc1= {1,i,j};
-                int[] loc2= {2,i,j};
+                int[] loc0= {i,j,0};
+                int[] loc1= {i,j,1};
+                int[] loc2= ,i,j,2};
                 Color color = new Color(img.getRGB(i, j));
                 rgb.set(loc0, (double) color.getRed());
                 rgb.set(loc1, (double) color.getGreen());
