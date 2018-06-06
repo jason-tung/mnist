@@ -21,13 +21,13 @@ public abstract class LossFunction {
         throw new IllegalArgumentException("The function you specified is invalid");
     }
 
-    public tensor meanSquared(tensor output, tensor onehot){
+    public double meanSquared(tensor output, tensor onehot){
         double totSquares = 0;
         for (int i = 0; i < output.shape[0]; i++){
             int[] loc = {i};
             totSquares += Math.pow(py.val(output.get(i)) - py.val(onehot.get(i)), 2);
         }
-        return totSquares -
+        return totSquares / output.shape[0];
     }
 }
 

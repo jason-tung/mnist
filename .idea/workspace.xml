@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="35f6539f-21c8-44b2-842f-c36d0d81b330" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/net/LossFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/LossFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/net/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/net/Network.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="LossFunction.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/net/LossFunction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state relative-caret-position="391">
+              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#114#115#0" expanded="true" />
@@ -43,7 +42,7 @@
       <file leaf-file-name="Preprocessing.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/net/Preprocessing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
+            <state relative-caret-position="-17">
               <caret line="35" column="38" lean-forward="true" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -57,8 +56,11 @@
       <file leaf-file-name="Network.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/net/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+            <state relative-caret-position="621">
+              <caret line="45" column="56" lean-forward="true" selection-start-line="45" selection-start-column="56" selection-end-line="45" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -242,12 +244,12 @@
       <updated>1528170060236</updated>
       <workItem from="1528170063662" duration="996000" />
       <workItem from="1528172210565" duration="371000" />
-      <workItem from="1528247081601" duration="9611000" />
+      <workItem from="1528247081601" duration="9839000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10978000" />
+    <option name="totallyTimeSpent" value="11206000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -537,9 +539,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/net/Activation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/net/Preprocessing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
+        <state relative-caret-position="-17">
           <caret line="35" column="38" lean-forward="true" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -551,15 +563,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/net/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/net/Activation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="621">
+          <caret line="45" column="56" lean-forward="true" selection-start-line="45" selection-start-column="56" selection-end-line="45" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -568,8 +573,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/net/LossFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        <state relative-caret-position="391">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#114#115#0" expanded="true" />
