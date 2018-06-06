@@ -1,6 +1,6 @@
 package net;
-
 import np.*;
+
 
 import static py.py.*;
 
@@ -81,5 +81,12 @@ public class Preprocessing {
         }
         return np.vectorize(t, new normalize());
     }
+
+    public static void main(String[] args){
+	String filepath = "/home/students/2019/jtung/mnist/net/test.jpg";
+	tensor T = parse(filepath);
+	System.out.println(T);
+    }
+	
 
 }
