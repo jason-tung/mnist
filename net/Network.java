@@ -2,6 +2,7 @@ package net;
 
 import np.np;
 import np.tensor;
+import py.*;
 
 public class Network{
     LossFunction loss_function;
@@ -9,12 +10,16 @@ public class Network{
     int count_layers;
     int count_nodes;
     String descent_mode;
+    Activation activation_function;
+    double bias;
 
-    public Network(int numLayers, int numNodes, Activation activFunc, LossFunction lossFunc){
+    public Network(int numLayers, int numNodes, String activFunct, String lossFunc, String descent_mode, double bias){
         loss_function = lossFunc;
         count_layers = numLayers;
         count_nodes = numNodes;
-        descent_mode = activFunc.callType;
+        this.descent_mode = descent_mode;
+        activation_function = new Activation(activFunct);
+        this.bias = bias;
     }
 
 
@@ -32,8 +37,13 @@ public class Network{
 
     }
 
-    public static double getNewActivation(tensor activation, tensor weights){
-        int[784]
+    public double nextActivation(tensor activation, tensor weights){
+        double activationSum = 0;
+        for (int i = 0; i < activation.shape[0]; i++){
+            int[] shape = {i};
+            activationSum += py.val(activation.g(shape)) * py.val(weights.g(shape));
+        }
+        return activation_function.apply(activationSum);
     }
 
     //takes in file name and predicts number
@@ -47,5 +57,8 @@ public class Network{
 }
 
 class Layer{
+    tensor iWeights;
+    tensor oWeights;
+    tensor activations;
 
 }
