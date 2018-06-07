@@ -25,8 +25,8 @@ public class Network{
         this.descent_mode = descent_mode;
         activation_function = new Activation(activFunct);
         this.bias = bias;
-        setupLayers();
-        setupWeights();
+        setupLayers(); //makes empty layers with the right activation length
+        setupWeights(); //adds the empty weights to the layers
     }
 
     /**
@@ -57,7 +57,10 @@ public class Network{
     public void setupWeights(int i){
         if(i < layers.size() - 1){
             Layer ref = layers.get(i);
-            
+            int nextLayerSize = layers.get(i + 1).activations.shape[0];
+            int[] shape = {nextLayerSize, ref.activations.shape[0]};
+            ref.weights = tensor.zeros(shape);
+            setupWeights(i + 1);
         }
     }
     //to be implemented
