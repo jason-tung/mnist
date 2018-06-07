@@ -42,10 +42,12 @@ public class Activation extends Callable{
         return Math.max(0, x);
     }
 
+
     public static tensor expand(tensor x, tensor oneD) {
-        if (!Arrays.equals(x.shape, oneD.shape)){
-            throw new IllegalArgumentException("tensors of different shapes");
-        }
+        // they need to be different shapes -- that's the point of expand
+//        if (!Arrays.equals(x.shape, oneD.shape)){
+//            throw new IllegalArgumentException("tensors of different shapes");
+//        }
         tensor newarray = tensor.zeros(x.shape);
         for (int i = 0; i < x.shape[0]; i++) {
             for (int j = 0; j < x.shape[1]; j++) {
