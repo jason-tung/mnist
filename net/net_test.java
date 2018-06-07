@@ -49,7 +49,6 @@ public class net_test {
     public void train(tensor X, tensor y, int batch_size, int epochs, double learning_rate){
         this.learning_rate = learning_rate;
         check_training(batch_size, X, y);
-        System.out.println(epochs);
         for(int i: range(epochs)){
             int k = 0;
             System.out.println("EPOCH: " + i + "/" + epochs);
@@ -67,10 +66,8 @@ public class net_test {
     }
 
     public void forward_pass(tensor X){
-        System.out.println(Arrays.toString(X.shape));
         this.layers.get(0).activations = X;
         for(int i: range(this.num_layers - 1)){
-            System.out.println(i + " Shapes: " + Arrays.toString(this.layers.get(i).activations.shape) + " " + Arrays.toString(this.layers.get(i).weights.shape) + " " + Arrays.toString(this.layers.get(i).bias.shape));
             tensor tmp = np.add(
                     np.matmul(this.layers.get(i).activations,
                     this.layers.get(i).weights),
@@ -80,7 +77,6 @@ public class net_test {
     }
 
     public void calc_loss(tensor y){
-        System.out.println(len(y.get(new int[]{0})) + " " +  this.layers.get(this.num_layers-1).num_nodes);
         if(len(y.get(new int[]{0})) != this.layers.get(this.num_layers-1).num_nodes) throw new IllegalArgumentException();
         if(this.loss.equals("mse")){
             class helper extends Callable{
@@ -120,11 +116,6 @@ public class net_test {
 
         for(int ind: range(i-1, 0, -1)) {
             y = this.layers.get(ind).activations;
-
-//            deltab = np.multiply(y,
-//                    np.multiply(np.vectorize(y, new helper()),
-//                    np.multiply(n_bias, this.layers.get(ind).bias)));
-            System.out.println(Arrays.toString(n_bias.shape) + " " + this.layers.get(ind).bias);
             deltab = np.multiply(y, np.multiply(np.vectorize(y, new helper()),
                     np.sum(
                             np.multiply(n_bias, this.layers.get(ind).bias))));

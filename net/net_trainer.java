@@ -27,9 +27,9 @@ public class net_trainer {
         y = to_categorical(y, 10);
         System.out.println(Arrays.toString(y.shape));
 
-        net_test net = new net_test(3, new int[]{784, 20, 10}, new Activation[]{new Activation("none"), new Activation("tanh"), new Activation("sigmoid")}, "cross_entropy");
+        net_test net = new net_test(3, new int[]{784, 20, 10}, new Activation[]{new Activation("none"), new Activation("sigmoid"), new Activation("sigmoid")}, "cross_entropy");
 
-        net.train(x, y, 1, 50, 0.001);
+        net.train(x, y, 1, 50, 0.01);
 
 
 
