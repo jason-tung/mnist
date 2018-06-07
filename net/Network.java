@@ -91,16 +91,20 @@ public class Network{
      * performs a full forward pass through the network
      */
     public void fdpass(){
-        fdpass(1);
+        fdpass(0);
     }
 
     /**
-     * helper function that will get the activations for each layer with a certain index
-     * @param index index of the layer inside of the layer array
+     * helper function which sets the next layer's (index + 1) activations
+     * @param index index of the current layer inside of the layer array
      */
     public void fdpass(int index){
-        Layer ref = layers.get(index);
-
+        if (index < layers.size() - 1){
+            Layer ref = layers.get(index);
+            Layer nxt = layers.get(index + 1);
+            nxt.activations = ref.nextActivation(activation_function);
+            fdpass(index + 1);
+        }
     }
 
     public void bkpass(){
@@ -122,17 +126,7 @@ public class Network{
 //        return activation_function.apply(activationSum );
 //    }
 
-    /**
-     * gives the full activation layer for the next layer
-     * @param activations activation layer of current layer
-     * @param weights weights for the current layer
-     * @param biases bias for that layer
-     * @param activationFunction the activation type for the network
-     * @return activations for the next layer
-     */
-    public static tensor nextActivation(tensor activations, tensor weights, tensor biases, Activation activationFunction){
-        return activationFunction.apply(np.add(np.matmul(weights, activations), biases));
-    }
+
 
     /**
      * reads a filename and predicts the number
@@ -160,6 +154,15 @@ class Layer{
     public Layer(int count_nodes){
         int[] shape = {count_nodes};
         activations = tensor.zeros(shape);
+    }
+
+    /**
+     * gives the full activation layer for some layer
+     * @param activationFunction the activation type for the network
+     * @return activations for the next layer
+     */
+    public tensor nextActivation(Activation activationFunction){
+        return activationFunction.apply(np.add(np.matmul(weights, activations), biases));
     }
 
 }
