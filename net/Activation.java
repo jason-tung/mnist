@@ -1,12 +1,12 @@
 package net;
 
-//import java.util.*;
+import java.util.*;
 
 import np.*;
 import py.*;
 
 public class Activation {
-    private String callType;
+    public String callType;
 
     public Activation(String s) {
         callType = s;
@@ -37,6 +37,9 @@ public class Activation {
     }
 
     public static tensor expand(tensor x, tensor oneD) {
+        if (!Arrays.equals(x.shape, oneD.shape)){
+            throw new IllegalArgumentException("tensors of different shapes");
+        }
         tensor newarray = tensor.zeros(x.shape);
         for (int i = 0; i < x.shape[0]; i++) {
             for (int j = 0; j < x.shape[1]; j++) {
