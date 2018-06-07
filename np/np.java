@@ -33,10 +33,10 @@ public class np {
         for(int v: range(ar.length)){
             if (v != i){
                 tmp.add(ar[v]);
+            }
         }
-    }
         return tmp.stream().mapToInt(z->z).toArray();
-}
+    }
 
     private static ArrayList<int[][]> build_partitions(tensor t, int axis){
         if(axis >= t.shape.length) throw new IndexOutOfBoundsException();
@@ -48,18 +48,18 @@ public class np {
         return tensor.zeros(rm_one(t.shape, axis));
     }
 
-    private static tensor keepdims(tensor ntensor, int[] oldshape, int axis){
-	    int[] nshape = t.oldshape.clone();
-	    nshape[axis] = 1;
-	    tensor r = tensor.zeros(nshape);
-	    ArrayList<int[]> minds = list(ntensor);
-	    ArrayList<int[]> ninds = list(r);
-	    for(int i: range(minds.size())){
-		r.s(ninds.get(i), val(ntensor.g(ninds[i])));
-	    }
-	    return r;
+    private static tensor keepdims(tensor t, int[] oldshape, int axis){
+        int[] nshape = oldshape.clone();
+        nshape[axis] = 1;
+        tensor r = tensor.zeros(nshape);
+        ArrayList<int[]> minds = list(t);
+        ArrayList<int[]> ninds = list(r);
+        for(int i: range(minds.size())){
+            r.s(ninds.get(i), val(t.g(ninds.get(i))));
+        }
+        return r;
     }
-	
+
 
     /**
      *
@@ -83,16 +83,6 @@ public class np {
         return r;
     }
 
-    public static tensor mean(tensor a, int axis, boolean keepdims){
-	if (keepdims){
-
-	    
-	}
-	else{
-	    return mean(a, axis);
-	}
-    }
-	    
 
     /**
      *
@@ -107,6 +97,19 @@ public class np {
             count += 1;
         }
         return sum / count;
+    }
+
+    /**
+     *
+     * @param a tensor object
+     * @param axis axis that is collapsed
+     * @param keepdims option to keep dimensionality the same
+     * @return a tensor where mean has been collapsed along one entry
+     */
+
+    public static tensor mean(tensor a, int axis, boolean keepdims){
+        if (keepdims){ return keepdims(mean(a, axis), a.shape, axis); }
+        else{ return mean(a, axis); }
     }
     /**
      *
@@ -143,6 +146,19 @@ public class np {
 
     /**
      *
+     * @param a tensor object that you want to take the sum of
+     * @param axis axis that is collapsed - the sums are taken along this axis
+     * @param keepdims option to keep dimensionality the same
+     * @return a tensor where entries along axis axis have been collapsed into one sum entry
+     */
+
+    public static tensor sum(tensor a, int axis, boolean keepdims){
+        if (keepdims){ return keepdims(sum(a, axis), a.shape, axis); }
+        else{ return sum(a, axis); }
+    }
+
+    /**
+     *
      * @param a tensor object that you want to take the max of
      * @param axis axis that is collapsed - the maxes are taken along this axis
      * @return a tensor where entries along axis axis have been collapsed into one max entry
@@ -173,6 +189,20 @@ public class np {
         }
         return max;
     }
+
+    /**
+     *
+     * @param a tensor object that you want to take the max of
+     * @param axis axis that is collapsed - the maxes are taken along this axis
+     * @param keepdims option to keep dimensionality the same
+     * @return a tensor where entries along axis axis have been collapsed into one max entry
+     */
+
+    public static tensor max(tensor a, int axis, boolean keepdims){
+        if (keepdims){ return keepdims(max(a, axis), a.shape, axis); }
+        else{ return max(a, axis); }
+    }
+
     /**
      *
      * @param a tensor object that you want to take the min of
@@ -204,6 +234,19 @@ public class np {
             min = Math.min(min, val(t.get(i)));
         }
         return min;
+    }
+
+    /**
+     *
+     * @param a tensor object that you want to take the min of
+     * @param axis axis that is collapsed - the mins are taken along this axis
+     * @param keepdims option to keep dimensionality the same
+     * @return a tensor where entries along axis axis have been collapsed into one min entry
+     */
+
+    public static tensor min(tensor a, int axis, boolean keepdims){
+        if (keepdims){ return keepdims(min(a, axis), a.shape, axis); }
+        else{ return min(a, axis); }
     }
 
     //np.matmul() goes here
@@ -411,22 +454,23 @@ public class np {
     public static void main(String[] args){
         tensor a = tensor.rand_normal(new int[]{3, 4});
         tensor c = tensor.rand_normal(new int[]{3, 4});
-        System.out.println(a);
-
-        System.out.println(max(a, 1));
+//        System.out.println(a);
+//
+//        System.out.println(max(a, 1));
 
         System.out.println(mean(a, 1));
+        print(mean(a, 1, true));
 
-        tensor q = np.add(a, c) ;
-        tensor b = tensor.ones(new int[]{4, 2});
-
-
-        tensor k = matmul(q, b);
-
-        print(k);
-
-        tensor z = matmul(k, eye(2));
-        print(z);
+//        tensor q = np.add(a, c) ;
+//        tensor b = tensor.ones(new int[]{4, 2});
+//
+//
+//        tensor k = matmul(q, b);
+//
+//        print(k);
+//
+//        tensor z = matmul(k, eye(2));
+//        print(z);
 
     }
 
