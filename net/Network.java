@@ -42,14 +42,14 @@ public class Network{
     }
 
     /**
-     * sets up the empty 2d tensors for the weights
+     * sets up the empty 2d tensors for the weights and biases
      */
     public void setupWeightsBiases(){
         setupWeightsBiases(0);
     }
 
     /**
-     * sets up weights for some index i in the layers array list
+     * sets up weights & biases for some index i in the layers array list
      * @param i the index of the arraylist layers
      */
     public void setupWeightsBiases(int i){
@@ -126,11 +126,12 @@ public class Network{
      * gives the full activation layer for the next layer
      * @param activations activation layer of current layer
      * @param weights weights for the current layer
-     * @param bias bias for that layer
+     * @param biases bias for that layer
+     * @param activationFunction the activation type for the network
      * @return activations for the next layer
      */
-    public static tensor nextActivation(tensor activations, tensor weights, tensor bias){
-        return np.add(np.matmul(weights, activations),
+    public static tensor nextActivation(tensor activations, tensor weights, tensor biases, Activation activationFunction){
+        return activationFunction.apply(np.add(np.matmul(weights, activations), biases));
     }
 
     /**
