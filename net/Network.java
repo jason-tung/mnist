@@ -14,19 +14,17 @@ public class Network{
     int count_nodes;
     String descent_mode;
     Activation activation_function;
-    double bias;
     public Layer input_layer;
     public Layer output_layer;
 
-    public Network(int numLayers, int numNodes, String activFunct, String lossFunc, String descent_mode, double bias){
+    public Network(int numLayers, int numNodes, String activFunct, String lossFunc, String descent_mode){
         loss_function = new LossFunction(lossFunc);
         count_layers = numLayers;
         count_nodes = numNodes;
         this.descent_mode = descent_mode;
         activation_function = new Activation(activFunct);
-        this.bias = bias;
         setupLayers(); //makes empty layers with the right activation length
-        setupWeights(); //adds the empty weights to the layers
+        setupWeightsBiases(); //adds the empty weights and biases to the layers
     }
 
     /**
@@ -46,23 +44,27 @@ public class Network{
     /**
      * sets up the empty 2d tensors for the weights
      */
-    public void setupWeights(){
-        setupWeights(0);
+    public void setupWeightsBiases(){
+        setupWeightsBiases(0);
     }
 
     /**
      * sets up weights for some index i in the layers array list
      * @param i the index of the arraylist layers
      */
-    public void setupWeights(int i){
+    public void setupWeightsBiases(int i){
         if(i < layers.size() - 1){
             Layer ref = layers.get(i);
             int nextLayerSize = layers.get(i + 1).activations.shape[0];
             int[] shape = {nextLayerSize, ref.activations.shape[0]};
             ref.weights = tensor.zeros(shape);
-            setupWeights(i + 1);
+            int[] shapeBiases = {nextLayerSize, 1};
+            ref.biases = tensor.zeros(shape);
+            setupWeightsBiases(i + 1);
         }
     }
+
+
     //to be implemented
     public tensor getOneHot(String filename){
         return null;
@@ -105,24 +107,30 @@ public class Network{
 
     }
 
-// TO BE FIXED
-    public double singleActivation(tensor activation, tensor weights){
-        double activationSum = 0;
-        for (int i = 0; i < activation.shape[0]; i++){
-            int[] shape = {i};
-            activationSum += py.val(activation.g(shape)) * py.val(weights.g(shape));
-        }
-        return activation_function.apply(activationSum - bias);
-    }
+//    /**
+//     * broken function -- to be used as scrap
+//     * @param activation
+//     * @param weights
+//     * @return
+//     */
+//    public double singleActivation(tensor activation, tensor weights){
+//        double activationSum = 0;
+//        for (int i = 0; i < activation.shape[0]; i++){
+//            int[] shape = {i};
+//            activationSum += py.val(activation.g(shape)) * py.val(weights.g(shape));
+//        }
+//        return activation_function.apply(activationSum );
+//    }
 
     /**
      * gives the full activation layer for the next layer
-     * @param activation activation layer of current layer
+     * @param activations activation layer of current layer
      * @param weights weights for the current layer
+     * @param bias bias for that layer
      * @return activations for the next layer
      */
-    public tensor nextActivation(tensor activation, tensor weights){
-
+    public static tensor nextActivation(tensor activations, tensor weights, tensor bias){
+        return np.add(np.matmul(weights, activations),
     }
 
     /**
@@ -142,6 +150,7 @@ public class Network{
 class Layer{
     public tensor weights;
     public tensor activations;
+    public tensor biases;
 
     /**
      * makes a layer with count_nodes dimensions
