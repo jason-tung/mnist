@@ -5,12 +5,16 @@ import java.util.*;
 import np.*;
 import py.*;
 
-public class Activation {
+public class Activation extends Callable{
     public String callType;
 
     public Activation(String s) {
         callType = s;
         apply(10); //Catch errors in the constructor without repeating the switch statement with a test
+    }
+
+    public Double call(double x){
+        return apply(x);
     }
 
     //applies a function class as an actual function
@@ -22,6 +26,8 @@ public class Activation {
                 return sigmoid(x);
             case "tanh":
                 return tanh(x);
+            case "none":
+                return x;
         }
         throw new IllegalArgumentException("The activation you specified is invalid");
     }

@@ -24,7 +24,7 @@ public class range implements Iterator<Integer>, Iterable<Integer>{
 
     @Override
     public boolean hasNext() {
-        return start < stop;
+        return (start < stop && step > 0) || (stop < start && step < 0);
     }
 
     public Integer next(){
@@ -34,7 +34,7 @@ public class range implements Iterator<Integer>, Iterable<Integer>{
     }
 
     public static void main(String[] args){
-        for(int i: new range(10, 123)){
+        for(int i: new range(10, 1, -1)){
             System.out.println(i);
         }
     }

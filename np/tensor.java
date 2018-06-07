@@ -1,4 +1,5 @@
 package np;
+import java.lang.reflect.Array;
 import java.util.*;
 import static py.py.*;
 
@@ -19,7 +20,9 @@ public class tensor extends quantity implements Iterable<int[]>{
         public quantity g(int[] a, int b){ return this; }
         public void s(int[] a, Double b){this.data = b; }
         public tensor transpose(){throw new UnsupportedOperationException("You tried to call transpose() on a scalar");}
+        public int[] shape(){throw new UnsupportedOperationException();}
     }
+    public int[] shape(){return shape.clone();}
 
     //public constructors and helper classes for function passing
 
@@ -106,6 +109,29 @@ public class tensor extends quantity implements Iterable<int[]>{
 
     public static tensor rand_normal(int[] shape, Double mean, Double variance){ return new tensor(shape, new normal(mean, variance)); }
 
+    /**
+     * Constructs a new tensor from a bunch of smaller tensors with the same shape
+     * @param tarr an array of tensors
+     */
+    public tensor(quantity[] tarr){
+        int[] shape = tarr[0].shape();
+        for(int i=0; i < tarr.length; i++){
+            if(!Arrays.equals(shape, tarr[i].shape())) throw new IllegalArgumentException("Shapes of tensors not constant");
+            tarr[i] = np.exp((tensor) tarr[i], 1);
+        }
+        ArrayList<Integer> tmp = new ArrayList<>();
+        tmp.add(tarr.length);
+        for(int i: tarr[0].shape()){
+            tmp.add(i);
+        }
+
+        this.shape = tmp.stream().mapToInt(i -> i).toArray();
+        this.data = tarr;
+    }
+
+    public tensor(ArrayList<quantity> t){
+        this(t.toArray(new quantity[t.size()]));
+    }
 
     //private constructor for flexible construction and helper methods
     private tensor(int[] shape, Callable fill_func){
@@ -190,7 +216,7 @@ public class tensor extends quantity implements Iterable<int[]>{
     public tensor transpose(){
         if(len(this.shape) > 2) throw new UnsupportedOperationException("I'm too stupid to implement transpose for 3D and above arrays");
         if(len(this.shape) == 1){
-            tensor t = tensor.zeros(this.shape);
+            tensor t = tensor.zeros(this.shape.clone());
             for(int[] i: this){
                 t.s(i, val(g(i)));
             }
@@ -206,6 +232,26 @@ public class tensor extends quantity implements Iterable<int[]>{
 
     public tensor T(){
         return this.transpose();
+    }
+
+    public tensor reshape(int[] target_shape){
+        int s1=1;
+        for(int i: this.shape){
+            s1 *=i;
+        }
+        int s2=1;
+        for(int i:target_shape){
+            s2*=i;
+        }
+
+        if(s1 != s2) throw new IllegalArgumentException("sizes are different");
+        tensor res = tensor.zeros(target_shape);
+        ArrayList<int[]> map_to = list(res);
+        ArrayList<int[]> map_from = list(this);
+        for(int i = 0; i < map_to.size(); i++) {
+            res.s(map_to.get(i), val(this.g(map_from.get(i))));
+        }
+        return res;
     }
 
     /**

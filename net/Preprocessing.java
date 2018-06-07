@@ -38,7 +38,7 @@ public class Preprocessing {
                 rgb.set(loc2, (double) color.getBlue());
             }
         }
-        return rgb;
+        return flatten(rgb);
     }
 
     //returns an image in the form of an int[][][] in rgb format, numbers should be from 0-256

@@ -271,7 +271,10 @@ public class np {
      */
     public static tensor matmul(tensor a, tensor b){
         if(!(a.shape.length==2 && b.shape.length==2)) throw new IllegalArgumentException("both tensors in matmul must be 2D");
-        if(!(a.shape[1] == b.shape[0])) throw new IllegalArgumentException("Cannot multiply tensors because cols a != rows b");
+        if(!(a.shape[1] == b.shape[0])){
+            System.out.println(Arrays.toString(a.shape) + " " + Arrays.toString(b.shape));
+            throw new IllegalArgumentException("Cannot multiply tensors because cols a != rows b");
+        }
         tensor r = tensor.zeros(new int[]{a.shape[0], b.shape[1]});
         for(int[] i: r){
             r.s(i, dot(get_col(b, i[1]), (tensor) a.g(new int[]{i[0]})));
@@ -321,6 +324,7 @@ public class np {
      * @return tensor that is the element-wise subtraction of a and b (a-b)
      */
     public static tensor subtract(tensor a, tensor b) {
+//        b = b.reshape(a.shape());
         if (Arrays.equals(a.shape, b.shape)) {
             tensor rTensor = tensor.zeros(a.shape);
             for (int[] index : a) {
@@ -328,6 +332,7 @@ public class np {
             }
             return rTensor;
         }
+        System.out.println(Arrays.toString(a.shape) + " " +Arrays.toString(b.shape));
         throw new IllegalArgumentException("tensors of different shapes");
     }
     /**
@@ -344,8 +349,17 @@ public class np {
             }
             return rTensor;
         }
+        System.out.println(Arrays.toString(a.shape) + " " +Arrays.toString(b.shape));
         throw new IllegalArgumentException("tensors of different shapes");
     }
+
+    public static tensor multiply(tensor a, double b) {
+            tensor rTensor = tensor.zeros(a.shape);
+            for (int[] index : a) {
+                rTensor.s(index, val(a.g(index))*b);
+            }
+            return rTensor;
+        }
     /**
      * Creates a new tensor where each element is the corresponding element in a + the corresponding element in b
      * @param a tensor object
