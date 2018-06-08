@@ -329,6 +329,17 @@ public class tensor extends quantity implements Iterable<int[]>{
         return res + "]\n";
     }
 
+    public static String tensorToStr(tensor t){
+        String str = "";
+        for (int i : t.shape()){
+            str += i + " ";
+        }
+        for (int[] i : t){
+            str += val(t.get(i)) + " ";
+        }
+        return str;
+    }
+
     public static void main(String[] args){
         tensor t = tensor.ones(new int[]{5, 4});
         tensor k = tensor.ones(new int[]{5, 4});
