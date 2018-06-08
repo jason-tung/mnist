@@ -374,6 +374,9 @@ public class np {
             }
             return rTensor;
         }
+
+        System.out.println(Arrays.toString(a.shape) + " " + Arrays.toString(b.shape));
+
         throw new IllegalArgumentException("tensors of different shapes");
     }
 

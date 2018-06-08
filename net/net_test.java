@@ -126,6 +126,8 @@ public class net_test {
                     np.vectorize(deltaw, new helper2()));
             n_bias = np.subtract(this.layers.get(ind-1).bias,
                     np.vectorize(deltab, new helper2()));
+            this.layers.get(ind).weights = n_weights;
+            this.layers.get(ind).bias = n_bias;
         }
         this.layers.get(0).weights = n_weights;
         this.layers.get(0).bias = n_bias;
