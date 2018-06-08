@@ -8,7 +8,9 @@ How to compile this mess:
 i.e.
 
 javac net\nn.java
+
 javac py\pyobj.java
+
 javac np\tensor.java
 
 so on an so forth
