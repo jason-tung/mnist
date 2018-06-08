@@ -11,6 +11,6 @@ javac net\nn.java
 javac py\pyobj.java
 javac np\tensor.java
 
-...
+so on an so forth
 
 Python script to do this automatically coming soon
