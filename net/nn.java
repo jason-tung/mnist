@@ -4,31 +4,6 @@ import static py.py.*;
 
 public class nn {
 
-    private static double sigmoid(double x) {
-        return 1 / (1 + Math.exp(-x));
-    }
-
-    private static double tanh(double x) {
-        return sinh(x) / cosh(x);
-    }
-
-    private static double sinh(double x) {
-        return (Math.exp(x) - Math.exp(-x)) / 2;
-    }
-
-    private static double cosh(double x) {
-        return (Math.exp(x) + Math.exp(-x)) / 2;
-    }
-
-    private static tensor sigmoid(tensor x){
-        class helper extends Callable{
-            public Double call(double x){
-                return sigmoid(x);
-            }
-        }
-        return np.vectorize(x, new helper());
-    }
-
     private static tensor relu(tensor x){
         class helper extends Callable{
             public Double call(double x){
@@ -36,14 +11,6 @@ public class nn {
             }
         }
         return np.vectorize(x, new helper());
-    }
-
-
-
-    public static double crossentropy(tensor y, tensor y_pred){
-        double L_sum = np.sum(np.multiply(y, np.log(y_pred)));
-        int m = y.shape[1];
-        return -(1.0/m) * L_sum;
     }
 
     public static void main(String[] args){
