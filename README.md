@@ -8,7 +8,7 @@ Usage:
 
 np and py are helper packages. You can completely ignore them.
 
-**Training the model:
+**Training the model**:
 
 There is a zip file in training_sets called training_sets.zip. Unzip that file and you should get two folders: train and validation
 
