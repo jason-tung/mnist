@@ -62,6 +62,7 @@ void mousePressed(){
       
       
       //change file name here
+      bound.resize(28,28);
       bound.save("test.jpeg");
       
       
