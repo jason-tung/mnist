@@ -4,7 +4,7 @@ How to compile this mess:
 ./javac.sh
 ```
 
-Usage:
+**Usage**:
 
 np and py are helper packages. You can completely ignore them.
 
