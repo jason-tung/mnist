@@ -62,8 +62,21 @@ void mousePressed(){
       
       
       //change file name here
-      bound.resize(28,28);
-      bound.save("test.jpeg");
+      //bound.resize(28,28);
+      //bound.save("test.jpeg");
+      
+      ////try to move file
+      //File file = new File("test.jpeg");
+      //System.out.println(file.getAbsolutePath());
+      //File parentFolder = new File(file.getParent());
+      //try{
+      //  Path temp = Files.move
+      //  (Paths.get(file.getAbsolutePath()), 
+      //  Paths.get(parentFolder.getPath() + "\\training_sets\\validation"));
+      //}
+      //catch(Exception e){
+      //  e.printStackTrace();
+      //}
       
       
       
