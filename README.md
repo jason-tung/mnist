@@ -5,7 +5,14 @@ How to compile this mess:
 ```
 
 **Usage**:
-np and py are helper packages. You can completely ignore them.
+
+np -> provides tensors and tensor operations
+
+py -> provides syntactic sugar like what python has. I miss python. Alot.
+
+net -> densely connected neural nets
+
+
 
 **Making your own validation set**:
 
@@ -38,15 +45,27 @@ Training the model can be done with nn.train(). Since the code I wrote is really
 
 
 **driver.java shortcuts**
+
 driver.java class makes this really simple with the train_mnist_net(String data_directory, String save_directory) function, which will load data from the data_directory, train the model, and save copies of the model in save_directory. 
 
 I suggest that you use the validation set instead of the training set to train the model. I didn't have enough time to implement a class that has flow_from_directory functionality such as this one: https://keras.io/preprocessing/image/, so train_mnist_net loads all the images into memory as tensors first. Loading 10000 images from validation is doable, 60000 from train is a stretch. 
 
 **NOTE THAT THIS WILL THROW AN ERROR IF YOU DON'T MODIFY THE PATHS IN THE DRIVER.JAVA SOURCE FILE!!!!**
 
+Additionally driver.java comes with a predict() function. Since I already wrote the documentation for this in comments, I'll just repaste it here
+
+    /**
+     * Returns the label of an image given a filename
+     * @param n a trained neural network
+     * @param filepath path to a mnist image
+     * @return the predicted label of the image
+     */
+
+    public static int predict(neural_net n, String filepath){
+
 **predicting**
 
-Each nn object comes with a .predict(tensor x) method which will predict the ys from a given tensor of xs. The input for this function must be a tensor made from samples, not just one sample. Luckily you can change an ArrayList of tensors into a tensor really easily as this functionality is supported in the constructor: tensor t = new tensor(ArrayList<tensor>). .predict() will output a tensor that corresponds to the y for each sample in x.
+Each nn object comes with a .predict(tensor x) method which will predict the ys from a given tensor of xs. The input for this function must be a tensor made from samples, not just one sample. Luckily you can change an ArrayList of tensors into a tensor really easily as this functionality is supported in the constructor: tensor t = new tensor(ArrayList<tensor>). .predict() will output a tensor that corresponds to the y for each sample in x. These outputs will be one-hot encoded. To extract the class labels, use np.argmax(prediction, axis=1)
 
 
 **one-hot-encoding**
