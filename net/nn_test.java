@@ -43,7 +43,7 @@ public class nn_test implements Serializable{
         return t;
     }
 
-    public ArrayList<tensor> grads(tensor X, tensor Y, ArrayList<tensor> weights){
+    public ArrayList<tensor> grads(tensor X, tensor Y){
         ArrayList<tensor> grads = new ArrayList<>();
         for(tensor t: weights){
             grads.add(tensor.zeros(t.shape.clone()));
@@ -68,7 +68,7 @@ public class nn_test implements Serializable{
 
         ArrayList<tensor> res = new ArrayList<>();
         for(tensor ttt: grads){
-            res.add(np.multiply(ttt, 1.0/len(X)));
+            res.add(np.divide(ttt, len(X)));
         }
         return res;
     }
@@ -82,9 +82,8 @@ public class nn_test implements Serializable{
                 x = x.clone(); //Safety measure, shapes might get reused and changes happening can mess everything up by reference
                 y = y.clone();
 
-                ArrayList<tensor> grads = grads(x, y, weights);
-//                System.out.println(grads.get(0));
-                for(int w: range(grads.size())){
+                ArrayList<tensor> grads = grads(x, y);
+                for(int w: range(weights.size())){
                     weights.set(w, np.subtract(weights.get(w), np.multiply(grads.get(w), lr)));
                 }
                 ArrayList<tensor> p = fwd_pass(x);
@@ -133,10 +132,10 @@ public class nn_test implements Serializable{
     }
 
     public static void main(String[] args){
-        nn_test tst = new nn_test(784, 100, 10, 0.1);
+        nn_test tst = new nn_test(784, 100, 10, 0.01);
 
         tensor X = tensor.rand_normal(new int[]{100, 784});
-        tensor Y = tensor.zeros(new int[]{100, 10});
+        tensor Y = tensor.rand_normal(new int[]{100, 10});
 
         tst.train(X, Y, 100, 5, "");
 

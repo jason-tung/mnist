@@ -83,7 +83,7 @@ public class driver {
         tensor x = new tensor(tmpx);
         y = Preprocessing.to_categorical(y, 10);
 
-        nn_test mnist_net = new nn_test(784, 100, 10, 1e-6);
+        nn_test mnist_net = new nn_test(784, 100, 10, 0.1);
 
         mnist_net.train(x, y, 100, 20, save_directory);
     }

@@ -377,12 +377,12 @@ public class np {
     }
 
     public static tensor multiply(tensor a, double b) {
-            tensor rTensor = tensor.zeros(a.shape);
-            for (int[] index : a) {
-                rTensor.s(index, val(a.g(index))*b);
-            }
-            return rTensor;
+        tensor rTensor = tensor.zeros(a.shape);
+        for (int[] index : a) {
+            rTensor.s(index, val(a.g(index))*b);
         }
+        return rTensor;
+    }
     /**
      * Creates a new tensor where each element is the corresponding element in a + the corresponding element in b
      * @param a tensor object
@@ -419,6 +419,13 @@ public class np {
             return rTensor;
         }
         throw new IllegalArgumentException("tensors of different shapes");
+    }
+
+    public static tensor divide(tensor a, double b) {
+        tensor rTensor = tensor.zeros(a.shape);
+        for (int[] index : a) {
+            rTensor.s(index, val(a.g(index)) / b);
+        }return rTensor;
     }
 
     //single tensor regular operators
