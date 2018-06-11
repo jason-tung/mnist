@@ -5,7 +5,11 @@ How to compile this mess:
 ```
 
 **Usage**:
-np and py are helper packages. You can completely ignore them.
+np -> provides tensors and tensor operations
+py -> provides syntactic sugar like what python has. I miss python. Alot.
+net -> densely connected neural nets
+
+
 
 **Making your own validation set**:
 
