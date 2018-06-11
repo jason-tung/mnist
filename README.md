@@ -38,11 +38,14 @@ Training the model can be done with nn.train(). Since the code I wrote is really
 
 
 **driver.java shortcuts**
+
 driver.java class makes this really simple with the train_mnist_net(String data_directory, String save_directory) function, which will load data from the data_directory, train the model, and save copies of the model in save_directory. 
 
 I suggest that you use the validation set instead of the training set to train the model. I didn't have enough time to implement a class that has flow_from_directory functionality such as this one: https://keras.io/preprocessing/image/, so train_mnist_net loads all the images into memory as tensors first. Loading 10000 images from validation is doable, 60000 from train is a stretch. 
 
 **NOTE THAT THIS WILL THROW AN ERROR IF YOU DON'T MODIFY THE PATHS IN THE DRIVER.JAVA SOURCE FILE!!!!**
+
+Additionally driver.java
 
 **predicting**
 
