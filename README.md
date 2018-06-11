@@ -12,6 +12,10 @@ py -> provides syntactic sugar like what python has. I miss python. Alot.
 
 net -> densely connected neural nets
 
+We also have javadocs, which is probably a lot better than this mess. You can open that up in the docs folder or you can just look through the code for somewhat well written comments. Jason didn't comment his code though so all the docs you'll get for makePicture will be here.
+
+
+
 
 
 **Making your own validation set**:
