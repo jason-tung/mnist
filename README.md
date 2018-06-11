@@ -8,7 +8,7 @@ How to compile this mess:
 np and py are helper packages. You can completely ignore them.
 
 **Making your own validation set**:
-located in the makePicture directory is the makePicture.pde file. click the pencil to draw, the eraser to erase, and the floppy disk to save the drawing in the window. then, run the bash script to move the picture into the mnist/training_sets/validation folder.
+located in the makePicture directory is the makePicture.pde file. click the pencil to draw, the eraser to erase, and the floppy disk to save the drawing in the window. then, run the bash script to move the picture into the mnist/training_sets/tests folder.
 
 **Preprocessing Inputs**
 
