@@ -163,10 +163,15 @@ public class neural_net implements Serializable{
     public static void main(String[] args){
         neural_net tst = new neural_net(784, 100, 10, 0.01);
 
+
         tensor X = tensor.rand_normal(new int[]{100, 784});
         tensor Y = tensor.rand_normal(new int[]{100, 10});
 
-        tst.train(X, Y, 100, 5, "");
+        tst.train(X, Y, 1, 5, "");
+
+
+        tst.save("C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models\\mod.ser");
+        neural_net tft = load_from_file("C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models\\mod.ser");
 
     }
 

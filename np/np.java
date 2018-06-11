@@ -17,6 +17,12 @@ public class np {
 
     //np.argmax() goes here
 
+    /**
+     * Returns the indices of the maximum values along a given axis
+     * @param a tensor
+     * @param axis axis to operate along
+     * @return
+     */
     public static tensor argmax(tensor a, int axis){
 
         if (a.shape.length != 2) throw new IllegalStateException("Argmax must have dimensionality 2");
