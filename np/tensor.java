@@ -245,7 +245,10 @@ public class tensor extends quantity implements Iterable<int[]>{
             s2*=i;
         }
 
-        if(s1 != s2) throw new IllegalArgumentException("sizes are different");
+        if(s1 != s2){
+            System.out.println(Arrays.toString(this.shape));
+            throw new IllegalArgumentException("sizes are different");
+        }
         tensor res = tensor.zeros(target_shape);
         ArrayList<int[]> map_to = list(res);
         ArrayList<int[]> map_from = list(this);

@@ -289,7 +289,10 @@ public class np {
      * @return a tensor that is equivalent to a * b
      */
     public static tensor matmul(tensor a, tensor b){
-        if(!(a.shape.length==2 && b.shape.length==2)) throw new IllegalArgumentException("both tensors in matmul must be 2D");
+        if(!(a.shape.length==2 && b.shape.length==2)){
+            System.out.println(Arrays.toString(a.shape) + " " + Arrays.toString(b.shape));
+            throw new IllegalArgumentException("both tensors in matmul must be 2D");
+        }
         if(!(a.shape[1] == b.shape[0])){
             System.out.println(Arrays.toString(a.shape) + " " + Arrays.toString(b.shape));
             throw new IllegalArgumentException("Cannot multiply tensors because cols a != rows b");
