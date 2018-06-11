@@ -66,6 +66,9 @@ Additionally driver.java comes with a predict() function. Since I already wrote 
 **predicting**
 
 Each nn object comes with a .predict(tensor x) method which will predict the ys from a given tensor of xs. The input for this function must be a tensor made from samples, not just one sample. Luckily you can change an ArrayList of tensors into a tensor really easily as this functionality is supported in the constructor: tensor t = new tensor(ArrayList<tensor>). .predict() will output a tensor that corresponds to the y for each sample in x. These outputs will be one-hot encoded. To extract the class labels, use np.argmax(prediction, axis=1)
+    
+    
+An easy way to check if the predictions are correct are the following. The filenames are named like C:\Users\Jason\IdeaProjects\mnist\training_sets\validation\0_7526.jpg for instance. The actual name is 0_7526.jpg, and the first character in that name corresponds to its label. So that file would show a 0.
 
 
 **one-hot-encoding**
