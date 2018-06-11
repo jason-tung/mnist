@@ -47,6 +47,7 @@ Both inputs and outputs have to be tensors.
 
 Training the model can be done with nn.train(). Since the code I wrote is really inefficient, you can expect this to take a pretty long time. The model will be saved once for each epoch. 
 
+We have several pre-trained models in the net/saved_models directory. 1, 2, and 3 are serialized nets after 1, 2, and 3 epochs respectively.
 
 **driver.java shortcuts**
 
