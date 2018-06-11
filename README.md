@@ -59,9 +59,7 @@ execute bash script to move picture after making it
 **EDIT**
 The neural network bug has been fixed, neural net predicts with 90-100% accuracy.
 
-
-**CREDITS**
-At 11:10 PM I was on the verge of giving up. I had already squashed several bugs, but the network still wasn't working. It was then that I prayed to my Lord and Savior Jesus Christ. It was not thirty seconds later when I spotted lr=1e-6: the learning rate was set too low for the model to learn anything in a reasonable amount of time.
+I was on the verge of giving up. I had already squashed several bugs, but the network still wasn't working. It was then that I prayed to my Lord and Savior Jesus Christ. It was not thirty seconds later when I spotted lr=1e-6: the learning rate was set too low for the model to learn anything in a reasonable amount of time.
 
 I thank my Lord and Savior Jesus Christ for letting me finish this project.
 
