@@ -81,12 +81,17 @@ The ys that are outputted will be one-hot-encoded. This means that the network w
 You can extract the actual digit by finding the index of the maximum value in the output tensor (for each sample, the the tensor that contains everything).
 
 **issues**
+
 as of 6/10/18 9:10PM, the loss does not go below 5
+
 user has to manually compile everything to resolve issues with circular importing
+
 execute bash script to move picture after making it
+
 windows users beware: remove the Thumbs.db from the training_set directories using a shell before running driver, or an error will be thrown.
 
 **EDIT**
+
 The neural network bug has been fixed, neural net predicts with 90-100% accuracy.
 
 I was on the verge of giving up. I had already squashed several bugs, but the network still wasn't working. It was then that I prayed to my Lord and Savior Jesus Christ. It was not thirty seconds later when I spotted lr=1e-6: the learning rate was set too low for the model to learn anything in a reasonable amount of time.
