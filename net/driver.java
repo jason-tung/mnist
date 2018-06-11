@@ -121,10 +121,10 @@ public class driver {
         String data_directory = "C:\\Users\\Jason\\IdeaProjects\\mnist\\training_sets\\validation";
         String save_directory = "C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models";
         //To train the network uncomment the below line:
-        //train_mnist_net(data_directory, save_directory);
-        neural_net net = neural_net.load_from_file("C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models\\0.ser");
+//        train_mnist_net(data_directory, save_directory);
+        neural_net net = neural_net.load_from_file("C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models\\mod.ser");
         for (String file: showFiles(data_directory)) {
-            System.out.println(file + predict(net, file));
+            System.out.println(file + "PREDICTION:   " + predict(net, file));
         }
 
     }
