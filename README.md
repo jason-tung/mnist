@@ -29,7 +29,7 @@ converts an image into a tensor. At the moment it only only converts black and w
 have it convert all images with an easy fix to the source code.
 
 Instead of normalize(black_white_imgToTensor(openFile(fileName))) use 
-Instead of normalize(imgToTensor(openFile(fileName))), which will return RGB values.
+normalize(imgToTensor(openFile(fileName))), which will return RGB values.
 
 **Training the model**:
 
