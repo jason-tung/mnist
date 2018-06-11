@@ -11,6 +11,13 @@ public class neural_net implements Serializable{
     private ArrayList<tensor> weights;
     private double lr;
 
+    /**
+     * Creates a new neural net
+     * @param input_dim Dimensionality of the inputs. i.e. mnist image is 28 * 28 --> 784 D vector, so this will be 784
+     * @param hidden_dim Number of neurons in the hidden layer
+     * @param output_dim Dimensionality of hte outputs. i.e. mnist image has 10 classes, so this will be 10
+     * @param learning_rate Learning rate of the model
+     */
     public neural_net(int input_dim, int hidden_dim, int output_dim, double learning_rate){
         int[] w1 = new int[]{input_dim, hidden_dim};
         int[] w2 = new int[]{hidden_dim, output_dim};
@@ -34,7 +41,7 @@ public class neural_net implements Serializable{
         return np.vectorize(x, new helper());
     }
 
-    public ArrayList<tensor> fwd_pass(tensor X){
+    private ArrayList<tensor> fwd_pass(tensor X){
         ArrayList<tensor> t = new ArrayList<>();
         t.add(X);
         for(tensor w: weights){
@@ -43,7 +50,7 @@ public class neural_net implements Serializable{
         return t;
     }
 
-    public ArrayList<tensor> grads(tensor X, tensor Y){
+    private ArrayList<tensor> grads(tensor X, tensor Y){
         ArrayList<tensor> grads = new ArrayList<>();
         for(tensor t: weights){
             grads.add(tensor.zeros(t.shape.clone()));
@@ -73,6 +80,14 @@ public class neural_net implements Serializable{
         return res;
     }
 
+    /**
+     * Train a model
+     * @param X a tensor that represents all of your Xs
+     * @param Y a tensor of labels that correspond to your X values
+     * @param epochs number of times to iterate over the data
+     * @param batch_size number of samples to iterate over at once
+     * @param savedir directory to save trained models
+     */
     public void train(tensor X, tensor Y, int epochs, int batch_size, String savedir){
         for(int i: range(epochs)){
             for(int j: range(0, len(X), batch_size)){
@@ -104,6 +119,15 @@ public class neural_net implements Serializable{
         }
     }
 
+    public tensor predict(tensor x){
+        ArrayList<tensor> t = fwd_pass(x);
+        return np.argmax(t.get(t.size()-1), 1);
+    }
+
+    /**
+     * Saves a neural network
+     * @param path path to save to
+     */
     public void save(String path){
         try{
             FileOutputStream out = new FileOutputStream(path);
@@ -117,6 +141,11 @@ public class neural_net implements Serializable{
         }
     }
 
+    /**
+     * Load a neural network from file
+     * @param path path to load from
+     * @return a neural network
+     */
     public static neural_net load_from_file(String path){
         try {
             FileInputStream fis = new FileInputStream(path);

@@ -8,8 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static py.py.list;
-import static py.py.range;
+import static py.py.*;
 
 public class driver {
 
@@ -40,6 +39,11 @@ public class driver {
         return res;
     }
 
+    /**
+     * Trains a model on a dataset
+     * @param data_directory Directory where the images are stored
+     * @param save_directory Directory to save trained models
+     */
     public static void train_mnist_net(String data_directory, String save_directory){
         String dirname = data_directory;
 
@@ -83,30 +87,45 @@ public class driver {
         tensor x = new tensor(tmpx);
         y = Preprocessing.to_categorical(y, 10);
 
-        nn_test mnist_net = new nn_test(784, 100, 10, 0.1);
+        neural_net mnist_net = new neural_net(784, 100, 10, 0.1);
 
         mnist_net.train(x, y, 100, 20, save_directory);
+    }
+
+    /**
+     * Returns the label of an image given a filename
+     * @param n a trained neural network
+     * @param filepath path to a mnist image
+     * @return the predicted label of the image
+     */
+
+    public static int predict(neural_net n, String filepath){
+
+        tensor img = Preprocessing.parse(filepath);
+        tensor[] tmp = new tensor[1];
+        tmp[0] = img;
+        tensor f = n.predict(new tensor(tmp));
+        for(int[] i: f){
+            return (int) val(f.get(i));
+        }
+        throw new IllegalStateException("this is here so it compiles error");
     }
 
 
 
     public static void main(String[] args){
 
-        System.out.println("to train a model uncomment the below line and modify the paths");
-        train_mnist_net("C:\\Users\\Jason\\IdeaProjects\\mnist\\training_sets\\validation", "C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models");
 
+        System.out.println("to train a model run train_mnist_net. You need to provide a directory where the images are located, and a directory to save your models");
 
-//        nn n = nn.load_from_file("C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models\\1.ser");
-//
-//        for(String file:showFiles("C:\\Users\\Jason\\IdeaProjects\\mnist\\training_sets\\validation")){
-//            tensor[] t = new tensor[1];
-//            t[0] = Preprocessing.parse(file);
-//            tensor k = new tensor(t);
-//            System.out.println(file + " " + np.argmax(n.predict(k), 1) + " " + n.predict(k));
-//
-//        }
+        String data_directory = "C:\\Users\\Jason\\IdeaProjects\\mnist\\training_sets\\validation";
+        String save_directory = "C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models";
+        //To train the network uncomment the below line:
+        train_mnist_net(data_directory, save_directory);
+        neural_net net = neural_net.load_from_file("C:\\Users\\Jason\\IdeaProjects\\mnist\\net\\saved_models\\3.ser");
+        for (String file: showFiles(data_directory)) {
+            System.out.println(file + predict(net, file));
+        }
 
     }
-
-
 }
