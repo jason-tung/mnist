@@ -45,7 +45,16 @@ I suggest that you use the validation set instead of the training set to train t
 
 **NOTE THAT THIS WILL THROW AN ERROR IF YOU DON'T MODIFY THE PATHS IN THE DRIVER.JAVA SOURCE FILE!!!!**
 
-Additionally driver.java
+Additionally driver.java comes with a predict() function. Since I already wrote the documentation for this in comments, I'll just repaste it here
+
+    /**
+     * Returns the label of an image given a filename
+     * @param n a trained neural network
+     * @param filepath path to a mnist image
+     * @return the predicted label of the image
+     */
+
+    public static int predict(neural_net n, String filepath){
 
 **predicting**
 
