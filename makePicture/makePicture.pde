@@ -8,7 +8,7 @@ final int pWidth=40;
 void setup(){
   frameRate(240);
   size(700, 750);
-  background(255);
+  background(0);
   textAlign(CENTER,CENTER);
   textSize(28);
   strokeWeight(1); 
@@ -94,9 +94,9 @@ void mousePressed(){
 void mouseDragged(){
   //in draw area
   if (!(mouseY >= 5 && mouseY <= 45)){
-    fill(255); //white
+    fill(0); //white
     if (mode == 0){
-      fill(0);
+      fill(1);
     }
     ellipse(mouseX, mouseY, 40, 40);
   }
