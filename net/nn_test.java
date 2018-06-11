@@ -34,7 +34,7 @@ public class nn_test implements Serializable{
         return np.vectorize(x, new helper());
     }
 
-    public ArrayList<tensor> fwd_pass(tensor X, ArrayList<tensor> weights){
+    public ArrayList<tensor> fwd_pass(tensor X){
         ArrayList<tensor> t = new ArrayList<>();
         t.add(X);
         for(tensor w: weights){
@@ -49,12 +49,11 @@ public class nn_test implements Serializable{
             grads.add(tensor.zeros(t.shape.clone()));
         }
 
-        ArrayList<tensor> t = fwd_pass(X, weights);
+        ArrayList<tensor> t = fwd_pass(X);
 
         tensor delta = np.subtract(t.get(t.size()-1), Y);
 
         grads.set(grads.size()-1, np.matmul(t.get(t.size()-2).T(), delta));
-
 
         for(int i: range(t.size() - 2, 0, -1)){
             delta = np.matmul(delta, weights.get(i).T());
@@ -64,13 +63,12 @@ public class nn_test implements Serializable{
                     delta.s(inds, 0.0);
                 }
             }
-
             grads.set(i-1, np.matmul(t.get(i-1).T(), delta));
         }
 
         ArrayList<tensor> res = new ArrayList<>();
         for(tensor ttt: grads){
-            res.add(np.multiply(ttt, 1/len(X)));
+            res.add(np.multiply(ttt, 1.0/len(X)));
         }
         return res;
     }
@@ -85,10 +83,11 @@ public class nn_test implements Serializable{
                 y = y.clone();
 
                 ArrayList<tensor> grads = grads(x, y, weights);
-                for(int w: range(weights.size())){
+//                System.out.println(grads.get(0));
+                for(int w: range(grads.size())){
                     weights.set(w, np.subtract(weights.get(w), np.multiply(grads.get(w), lr)));
                 }
-                ArrayList<tensor> p = fwd_pass(x, weights);
+                ArrayList<tensor> p = fwd_pass(x);
                 tensor preds = np.argmax(p.get(p.size()-1), 1);
                 tensor f = np.argmax(y, 1);
 
