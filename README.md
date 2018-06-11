@@ -46,7 +46,7 @@ I suggest that you use the validation set instead of the training set to train t
 
 **predicting**
 
-Each nn object comes with a .predict(tensor x) method which will predict the ys from a given tensor of xs. The input for this function must be a tensor made from samples, not just one sample. Luckily you can change an ArrayList of tensors into a tensor really easily as this functionality is supported in the constructor: tensor t = new tensor(ArrayList<tensor>). .predict() will output a tensor that corresponds to the y for each sample in x.
+Each nn object comes with a .predict(tensor x) method which will predict the ys from a given tensor of xs. The input for this function must be a tensor made from samples, not just one sample. Luckily you can change an ArrayList of tensors into a tensor really easily as this functionality is supported in the constructor: tensor t = new tensor(ArrayList<tensor>). .predict() will output a tensor that corresponds to the y for each sample in x. These outputs will be one-hot encoded. To extract the class labels, use np.argmax(prediction, axis=1)
 
 
 **one-hot-encoding**
