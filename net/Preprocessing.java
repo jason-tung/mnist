@@ -41,9 +41,22 @@ public class Preprocessing {
         return flatten(rgb);
     }
 
+    public static tensor black_white_imgToTensor(BufferedImage img) {
+        int[] shape = {img.getHeight(),img.getWidth()};
+        tensor rgb =  tensor.zeros(shape);
+        for (int i = 0; i < img.getHeight(); i++) {
+            for (int j = 0; j < img.getWidth(); j++) {
+                int[] loc= {i,j};
+                Color color = new Color(img.getRGB(i, j));
+                rgb.set(loc, (double) color.getRed());
+            }
+        }
+        return flatten(rgb);
+    }
+
     //returns an image in the form of an int[][][] in rgb format, numbers should be from 0-256
     public static tensor parse(String fileName) { // should be in form (rows, cols, channels)
-        return imgToTensor(openFile(fileName));
+        return normalize(black_white_imgToTensor(openFile(fileName)));
     }
 
     //takes an ndimensional tensor and collapses it into a 1D tensor
@@ -76,7 +89,7 @@ public class Preprocessing {
     public static tensor normalize(tensor t) {
         class normalize extends Callable {
             public Double call(double k) {
-                return (k - 128) / 128;
+                return k / 256;
             }
         }
         return np.vectorize(t, new normalize());

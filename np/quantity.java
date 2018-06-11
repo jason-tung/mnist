@@ -1,7 +1,9 @@
 package np;
 import py.*;
 
-public abstract class quantity implements pyobj {
+import java.io.Serializable;
+
+public abstract class quantity implements pyobj, Serializable {
     public abstract String __str__();
     public abstract int __len__();
     public abstract double __val__();

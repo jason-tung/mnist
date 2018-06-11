@@ -1,4 +1,5 @@
 package np;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.*;
 import static py.py.*;
@@ -296,6 +297,15 @@ public class tensor extends quantity implements Iterable<int[]>{
         }
         return res.toArray(new int[res.size()][]);
 
+    }
+
+    /**
+     *
+     * @return A deep copy of this tensor
+     */
+
+    public tensor clone(){
+        return np.multiply(this, 1);
     }
 
     /**

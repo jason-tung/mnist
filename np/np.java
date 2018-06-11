@@ -17,6 +17,25 @@ public class np {
 
     //np.argmax() goes here
 
+    public static tensor argmax(tensor a, int axis){
+
+        if (a.shape.length != 2) throw new IllegalStateException("Argmax must have dimensionality 2");
+
+        tensor r = gen_newtensor(a, axis);
+        ArrayList<int[][]> partitions = build_partitions(a, axis);
+        for(int[][] i: partitions){
+            double max = val(a.get(i[0]));
+            int[] ind = i[0];
+            for(int[] index:i){
+                if(val(a.g(index)) > val(a.get(ind))){
+                    ind = index;
+                }
+            }
+            r.set(rm_one(i[0], axis), (double) ind[1]);
+        }
+        return r;
+    }
+
     //defining an algorithm to collapse an axis for these implementations.
 
     //iter_all returns all indices, need to iterate in a certain order - ind of select axis change most
@@ -275,6 +294,7 @@ public class np {
             System.out.println(Arrays.toString(a.shape) + " " + Arrays.toString(b.shape));
             throw new IllegalArgumentException("Cannot multiply tensors because cols a != rows b");
         }
+
         tensor r = tensor.zeros(new int[]{a.shape[0], b.shape[1]});
         for(int[] i: r){
             r.s(i, dot(get_col(b, i[1]), (tensor) a.g(new int[]{i[0]})));
