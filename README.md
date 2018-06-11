@@ -8,6 +8,7 @@ How to compile this mess:
 np and py are helper packages. You can completely ignore them.
 
 **Making your own validation set**:
+
 located in the makePicture directory is the makePicture.pde file. click the pencil to draw, the eraser to erase, and the floppy disk to save the drawing in the window. then, run the bash script to move the picture into the mnist/training_sets/tests folder. MAKE SURE THAT THE PICTURE IS BIG AND CENTERED LIKE THE SAMPLE DATA.
 
 **Preprocessing Inputs**
@@ -57,6 +58,7 @@ You can extract the actual digit by finding the index of the maximum value in th
 as of 6/10/18 9:10PM, the loss does not go below 5
 user has to manually compile everything to resolve issues with circular importing
 execute bash script to move picture after making it
+windows users beware: remove the Thumbs.db from the training_set directories using a shell before running driver, or an error will be thrown.
 
 **EDIT**
 The neural network bug has been fixed, neural net predicts with 90-100% accuracy.
