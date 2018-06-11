@@ -94,9 +94,9 @@ void mousePressed(){
 void mouseDragged(){
   //in draw area
   if (!(mouseY >= 5 && mouseY <= 45)){
-    fill(0); //white
+    fill(0); //black
     if (mode == 0){
-      fill(1);
+      fill(255);
     }
     ellipse(mouseX, mouseY, 40, 40);
   }
