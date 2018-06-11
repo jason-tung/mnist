@@ -86,18 +86,16 @@ public class nn_test implements Serializable{
 
                 ArrayList<tensor> grads = grads(x, y, weights);
                 for(int w: range(weights.size())){
-                    np.subtract(weights.get(w), np.multiply(grads.get(w), lr));
+                    weights.set(w, np.subtract(weights.get(w), np.multiply(grads.get(w), lr)));
                 }
                 ArrayList<tensor> p = fwd_pass(x, weights);
                 tensor preds = np.argmax(p.get(p.size()-1), 1);
-                print(preds);
                 tensor f = np.argmax(y, 1);
-                print(f);
 
-                int t = 0;
+                double t = 0;
                 int c = 0;
                 for(int[] ind: preds){
-                    if((int) val(preds.get(ind)) == (int) val(f.get(ind))) t+= 1;
+                    if(val(preds.get(ind)) == val(f.get(ind))) t+= 1;
                     c += 1;
                 }
                 System.out.println("Epoch: " + i + " Batch: " + j + "/" + len(X) + " Acc: " + t/c);
