@@ -5,8 +5,11 @@ How to compile this mess:
 ```
 
 **Usage**:
+
 np -> provides tensors and tensor operations
+
 py -> provides syntactic sugar like what python has. I miss python. Alot.
+
 net -> densely connected neural nets
 
 
