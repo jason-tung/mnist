@@ -81,6 +81,12 @@ The ys that are outputted will be one-hot-encoded. This means that the network w
 
 You can extract the actual digit by finding the index of the maximum value in the output tensor (for each sample, the the tensor that contains everything).
 
+**Loading and saving models**
+Models are automatically saved once per epoch, but you can also call model.save(path) to do it manually.
+Trained models can be loaded with neural_net.load_from_file(path). There are some retrained models in net/saved_models. mod.ser is a completely untrained model.
+
+
+
 **issues**
 
 as of 6/10/18 9:10PM, the loss does not go below 5
