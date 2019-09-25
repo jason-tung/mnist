@@ -7,6 +7,9 @@ import static py.py.val;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.*; 
+import java.nio.file.Files; 
+import java.nio.file.*; 
 
 import np.quantity;
 import np.tensor;
@@ -54,7 +57,7 @@ public class driver {
 		ArrayList<Double> tmpy = new ArrayList<>();
 
 		for (String file : showFiles(dirname)) {
-			System.out.println(file);
+//			System.out.println(file);
 			tmpx.add(Preprocessing.parse(file));
 		}
 
@@ -122,12 +125,89 @@ public class driver {
 			data_directory = args[0];
 			save_directory = args[1];
 		}
+		copyFile("makePicture/test.png","input/test.png", true);
 		// To train the network uncomment the below line:
-//        train_mnist_net(data_directory, save_directory);
-		neural_net net = neural_net.load_from_file("net/saved_models/2.ser");
+//        train_mnist_net("train/training_sets/train", "net/saved_models");
+		neural_net net = neural_net.load_from_file("net/saved_models/0.ser");
 		for (String file : showFiles(data_directory)) {
 			System.out.println(file + "PREDICTION:   " + predict(net, file));
 		}
 
 	}
+
+	public static void copyFile(String from, String to, Boolean overwrite) {
+
+		try {
+			File fromFile = new File(from);
+			File toFile = new File(to);
+
+			if (!fromFile.exists()) {
+				throw new IOException("File not found: " + from);
+			}
+			if (!fromFile.isFile()) {
+				throw new IOException("Can't copy directories: " + from);
+			}
+			if (!fromFile.canRead()) {
+				throw new IOException("Can't read file: " + from);
+			}
+
+			if (toFile.isDirectory()) {
+				toFile = new File(toFile, fromFile.getName());
+			}
+
+			if (toFile.exists() && !overwrite) {
+				throw new IOException("File already exists.");
+			} else {
+				String parent = toFile.getParent();
+				if (parent == null) {
+					parent = System.getProperty("user.dir");
+				}
+				File dir = new File(parent);
+				if (!dir.exists()) {
+					throw new IOException("Destination directory does not exist: " + parent);
+				}
+				if (dir.isFile()) {
+					throw new IOException("Destination is not a valid directory: " + parent);
+				}
+				if (!dir.canWrite()) {
+					throw new IOException("Can't write on destination: " + parent);
+				}
+			}
+
+			FileInputStream fis = null;
+			FileOutputStream fos = null;
+			try {
+
+				fis = new FileInputStream(fromFile);
+				fos = new FileOutputStream(toFile);
+				byte[] buffer = new byte[4096];
+				int bytesRead;
+
+				while ((bytesRead = fis.read(buffer)) != -1) {
+					fos.write(buffer, 0, bytesRead);
+				}
+
+			} finally {
+				if (from != null) {
+					try {
+						fis.close();
+					} catch (IOException e) {
+						System.out.println(e);
+					}
+				}
+				if (to != null) {
+					try {
+						fos.close();
+					} catch (IOException e) {
+						System.out.println(e);
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("Problems when copying file.");
+		}
+	}
+
+
 }

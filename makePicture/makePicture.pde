@@ -63,7 +63,7 @@ void mousePressed(){
       
       //change file name here
       bound.resize(28,28);
-      bound.save("test.jpeg");
+      bound.save("test.png");
       
       ////try to move file
       //File file = new File("test.jpeg");
@@ -98,6 +98,6 @@ void mouseDragged(){
     if (mode == 0){
       fill(255);
     }
-    ellipse(mouseX, mouseY, 40, 40);
+    ellipse(mouseX, mouseY,70, 70);
   }
 }
