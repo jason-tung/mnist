@@ -51,7 +51,7 @@ void mousePressed(){
     
     //erase
     else if(mouseX >= 55 && mouseX <= 105){
-      mode = 1;
+      background(0);
       System.out.println("PROCED ERASE");
     }
     

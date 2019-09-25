@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mv test.jpeg ../training_sets/tests
+mv test.jpeg  ~/mnist/input/
 
 echo done
