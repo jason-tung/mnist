@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"net"},{"l":"np"},{"l":"py"}]
